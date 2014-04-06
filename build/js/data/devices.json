@@ -1,0 +1,20 @@
+{
+
+     "iPhone": {
+         "height": 480,
+         "width": 320,
+         "icon": "uk-icon-mobile"
+     },
+     "iPhone Retina": {
+         "height": 960,
+         "width": 640,
+          "icon": "uk-icon-mobile"
+     },
+     "iPad": {
+         "height": 1024,
+         "width": 768,
+          "icon": "uk-icon-tablet"
+     }
+
+
+ }

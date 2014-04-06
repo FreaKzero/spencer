@@ -1,0 +1,7 @@
+{
+  "name": "Spencer",
+  "version": "0.0.1",
+  "devDependencies": {
+    "grunt-contrib-copy": "~0.5.0"
+  }
+}
