@@ -11,7 +11,8 @@
 
 define(function (require, exports, module) {
 
-    var deviceFile = 'js/data/devices.json';
+    var deviceFile = 'js/data/devices.json',
+        utils = require('js/spencer/Utils.js');
 
 
     function buildOption(name, width, height, icon) {
@@ -24,10 +25,7 @@ define(function (require, exports, module) {
                 $(elem).append(buildOption(key, obj.width, obj.height, obj.icon));
             });
         });
-
-
     }
-
 
     function registerEvents(selectors) {
         var devicelink = selectors.main.dropdown + " a",
@@ -45,10 +43,6 @@ define(function (require, exports, module) {
             nav.find(selectors.frames.width).val(width);
             nav.find(selectors.frames.height).val(height);
 
-            if (url !== 'http://') {
-                $(stencilIframe).prop('src', url);
-            }
-
             var clone = $(selectors.main.stencil)
                 .clone()
                 .removeClass(selectors.main.stencil.substr(1))
@@ -65,6 +59,13 @@ define(function (require, exports, module) {
                     'height': height,
                     'width': width
                 });
+
+            if (utils.validateUrl(url)) {
+                clone.find('iframe').prop('src', url);
+            } else {
+                clone.find('iframe').prop('src', 'start.html');
+            }
+
 
             clone.appendTo(selectors.main.container).hide().fadeIn("slow");
         });

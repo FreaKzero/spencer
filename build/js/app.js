@@ -5,15 +5,17 @@ requirejs.config({
     paths: {
         'jquery': 'vendor/jquery-1.10.2.min',
         'uikit': 'uikit',
+        'spencerMain': 'spencer/Main',
         'spencerFrames': 'spencer/Frames',
         'spencerDevices': 'spencer/DeviceLoader',
-        'spencerErrors': 'spencer/ErrorMessenger'
+        'spencerErrors': 'spencer/ErrorMessenger',
+        'utils': 'spencer/Utils'
     }
 });
 
 
-require(['jquery', 'spencerDevices', 'spencerFrames', 'spencerErrors', 'uikit'],
-    function ($, spencerDevices, spencerFrames, spencerErrors, uikit) {
+require(['jquery', 'spencerDevices', 'spencerFrames', 'spencerErrors', 'spencerMain', 'uikit'],
+    function ($, spencerDevices, spencerFrames, spencerErrors, spencerMain, uikit) {
 
         var selectors = {
             "frames": {
@@ -34,6 +36,9 @@ require(['jquery', 'spencerDevices', 'spencerFrames', 'spencerErrors', 'uikit'],
             }
         };
 
+        // Register Mains
+        spencerMain.register(selectors);
+
         // Register the Errorchecker
         spencerErrors.register(selectors);
 
@@ -43,15 +48,4 @@ require(['jquery', 'spencerDevices', 'spencerFrames', 'spencerErrors', 'uikit'],
         // Register Event Handlers for the Frames
         spencerFrames.registerEvents(selectors);
 
-        $('#go').on('click', function () {
-            $('.uk-icon-spin').removeClass('uk-icon-spin');
-            var url = $('#url').val();
-
-            $('.frame iframe').each(function (i, obj) {
-                var id = $(this).prop('id');
-                if (id !== "") {
-                    $(this).prop('src', url);
-                }
-            });
-        });
     });

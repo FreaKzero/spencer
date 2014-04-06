@@ -7,7 +7,7 @@
     <title></title>
     <link rel="stylesheet" href="css/uikit.gradient.min.css">
     <link rel="stylesheet" href="css/spencer.css">
-    <script src="js/vendor/require.js" data-main="js/main.js"></script>   
+    <script src="js/vendor/require.js" data-main="js/app.js"></script>
 </head>
 
 <body>
@@ -23,9 +23,11 @@
                     <input type="text" id="url" value="http://" style="width: 320px">
                 </div>
                 <div class="uk-button-group">
-                    <button id="go" class="uk-button uk-button-primary"><i class="uk-icon-folder-open"></i>&nbsp;Open URL</button>
+                    <button id="go" class="uk-button uk-button-primary">
+                        <i class="uk-icon-folder-open"></i>&nbsp;Open URL</button>
                     <button class="uk-button uk-button-primary" data-uk-modal="{target:'#scriptmodal'}">
-                        <i class="uk-icon-code"></i>&nbsp;spencer.js</button>
+                        <i class="uk-icon-code"></i>
+                    </button>
                 </div>
             </div>
         </div>
@@ -82,16 +84,17 @@
     <div id="scriptmodal" class="uk-modal">
         <div class="uk-modal-dialog">
             <a class="uk-modal-close uk-close"></a>
-            <h2>Spencer Errortesting with spencer.js</h2>
+            <h2>See Errors with spencer.js</h2>
             <p>To Enable Errortesting for Spencer Please insert this CodeSnipplet into the Site you want to Test.</p>
             <br />
             <div class="uk-form uk-margin-remove uk-display-inline-block">
-            <textarea class="uk-form" cols="85" rows="5" id="spencerjsLink">
-                
-            </textarea>
+                <textarea class="uk-form" cols="85" rows="5" id="spencerjsLink">
+
+                </textarea>
             </div>
         </div>
     </div>
+
 </body>
 
 </html>
