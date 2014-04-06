@@ -9,7 +9,7 @@ define(function (require, exports, module) {
         var url = window.location + "",
             src = url.substring(0, url.lastIndexOf('/')) + "/spencer.js";
 
-        $('#spencerjsLink').val('<script type="text/javascript>' + src + '</script>');
+        $('#spencerjsLink').val('<script type="text/javascript">' + src + '</script>');
 
     }
 
