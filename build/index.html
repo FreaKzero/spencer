@@ -4,10 +4,10 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title></title>    
+    <title></title>
     <link rel="stylesheet" href="css/uikit.gradient.min.css">
     <link rel="stylesheet" href="css/spencer.css">
-    <script src="js/vendor/require.js" data-main="js/main.js"></script>
+    <script src="js/vendor/require.js" data-main="js/main.js"></script>   
 </head>
 
 <body>
@@ -22,7 +22,11 @@
                     <i class="uk-icon-compass"></i>
                     <input type="text" id="url" value="http://" style="width: 320px">
                 </div>
-                <button id="go" class="uk-button uk-button-primary">GO!</button>
+                <div class="uk-button-group">
+                    <button id="go" class="uk-button uk-button-primary"><i class="uk-icon-folder-open"></i>&nbsp;Open URL</button>
+                    <button class="uk-button uk-button-primary" data-uk-modal="{target:'#scriptmodal'}">
+                        <i class="uk-icon-code"></i>&nbsp;spencer.js</button>
+                </div>
             </div>
         </div>
 
@@ -52,17 +56,17 @@
                 <input type="number" min="200" max="1200" step="10" style="width: 50px" class="frame-width uk-form-small" />&nbsp;x
                 <input type="number" min="200" max="1200" step="10" style="width: 50px" class="frame-height uk-form-small" />&nbsp;
                 <div class="uk-button-group" style="margin-right: 15px;">
-                <button class="uk-button uk-button-small resizeFrame">
-                    <i class="uk-icon-exchange"></i>
-                </button>                
+                    <button class="uk-button uk-button-small resizeFrame">
+                        <i class="uk-icon-exchange"></i>
+                    </button>
                     <button class="uk-button uk-button-small rotateFrame">
                         <i class="uk-icon-share"></i>
                     </button>
                 </div>
-                    <button class="uk-button uk-button-small refreshFrame">
-                        <i class="uk-icon-refresh"></i>
-                    </button>
-                
+                <button class="uk-button uk-button-small refreshFrame">
+                    <i class="uk-icon-refresh"></i>
+                </button>
+
 
             </div>
             <div class="uk-navbar-flip" style="margin: 4px 10px 0 0;">
@@ -74,6 +78,20 @@
         <iframe src="start.html" scrolling="yes" border="0"></iframe>
     </div>
 
+
+    <div id="scriptmodal" class="uk-modal">
+        <div class="uk-modal-dialog">
+            <a class="uk-modal-close uk-close"></a>
+            <h2>Spencer Errortesting with spencer.js</h2>
+            <p>To Enable Errortesting for Spencer Please insert this CodeSnipplet into the Site you want to Test.</p>
+            <br />
+            <div class="uk-form uk-margin-remove uk-display-inline-block">
+            <textarea class="uk-form" cols="85" rows="5" id="spencerjsLink">
+                
+            </textarea>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>

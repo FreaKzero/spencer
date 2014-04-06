@@ -2,13 +2,28 @@
 /*global $, define, module */
 
 define(function (require, exports, module) {
-    
+
+
+    function writeSpencerLink() {
+
+        var url = window.location + "",
+            src = url.substring(0, url.lastIndexOf('/')) + "/spencer.js";
+
+        $('#spencerjsLink').val('<script type="text/javascript>' + src + '</script>');
+
+    }
+
     function register(selectors) {
+        writeSpencerLink();
+
         $(document).on("checkErrors", function (event, frameID) {
             var host = hostFromUrl($(selectors.main.url).val());
+
             if (host !== null) {
-                var ifr = document.getElementById(frameID).contentWindow;
-                ifr.postMessage('SPENCER;' + frameID, host);
+                var frameWidth = $('#' + frameID).width(),
+                    ifr = document.getElementById(frameID).contentWindow;
+
+                ifr.postMessage('SPENCER;' + frameWidth + ';' + frameID, host);
             }
         });
     }
@@ -17,7 +32,7 @@ define(function (require, exports, module) {
         var matches = url.match(/^(https?\:\/\/([^\/?#]+)(?:[\/?#]|$))/i);
         return matches && matches[1];
     }
-    
+
     function getBounds(e) {
         var d = e.data.split(';'),
             frame = $('#' + d[1]).parent('.frame'),
