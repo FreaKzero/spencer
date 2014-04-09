@@ -44,10 +44,7 @@ define(function (require, exports, module) {
             frame.addClass('frameerror');
         } else {
             frame.removeClass('frameerror');
-        }
-
-        $('.uk-icon-spin').removeClass('uk-icon-spin');
-
+        }        
     }
 
     window.addEventListener('message', getBounds);

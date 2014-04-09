@@ -55,6 +55,7 @@ define(function (require, exports, module) {
                 .prop('id', HTMLID)
                 .bind('load', function () {
                     $(document).trigger("checkErrors", [HTMLID]);
+                    $(this).parent('.frame').find('.uk-icon-spin').removeClass('uk-icon-spin');
                 }).css({
                     'height': height,
                     'width': width

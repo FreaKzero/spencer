@@ -20,32 +20,36 @@
 
                 <div class="uk-form-icon">
                     <i class="uk-icon-compass"></i>
-                    <input type="text" id="url" value="http://" style="width: 320px">
+                    <input type="text" id="url" value="http://" style="width: 450px">
                 </div>
                 <div class="uk-button-group">
                     <button id="go" class="uk-button uk-button-primary">
-                        <i class="uk-icon-folder-open"></i>&nbsp;Open URL</button>
-                    <button class="uk-button uk-button-primary" data-uk-modal="{target:'#scriptmodal'}">
-                        <i class="uk-icon-code"></i>
-                    </button>
+                        <i class="uk-icon-crosshairs"></i>&nbsp;Devices</button>
+                    <button id="newWindow" class="uk-button uk-button-primary">
+                        <i class="uk-icon-globe"></i>&nbsp;Browser</button>
                 </div>
             </div>
         </div>
 
         <div class="uk-navbar-content uk-navbar-flip">
-            <div class="uk-button-dropdown" data-uk-dropdown="{mode:'click'}">
-                <button class="uk-button uk-button-success">
-                    <i class="uk-icon-mobile"></i>
-                    Spawn Device
+            <div class="uk-button-group">
+                <div class="uk-button-dropdown" data-uk-dropdown="{mode:'click'}">
+                    <button class="uk-button uk-button-success">
+                        <i class="uk-icon-mobile"></i>
+                        Spawn Device
+                    </button>
+
+                    <div class="uk-dropdown uk-dropdown-center">
+                        <ul class="uk-nav uk-nav-dropdown" id="spawn">
+                        </ul>
+                    </div>
+                </div>
+                <button class="uk-button uk-button-success" data-uk-modal="{target:'#scriptmodal'}">
+                    <i class="uk-icon-code"></i>
                 </button>
 
-                <div class="uk-dropdown uk-dropdown-center">
-                    <ul class="uk-nav uk-nav-dropdown" id="spawn">
-                    </ul>
-                </div>
             </div>
         </div>
-
     </nav>
 
 
@@ -59,14 +63,14 @@
                 <input type="number" min="200" max="1200" step="10" style="width: 50px" class="frame-height uk-form-small" />&nbsp;
                 <div class="uk-button-group" style="margin-right: 15px;">
                     <button class="uk-button uk-button-small resizeFrame">
-                        <i class="uk-icon-exchange"></i>
+                        <i class="uk-icon-arrows-alt"></i>
                     </button>
                     <button class="uk-button uk-button-small rotateFrame">
-                        <i class="uk-icon-share"></i>
+                        <i class="uk-icon-rotate-right"></i>
                     </button>
                 </div>
                 <button class="uk-button uk-button-small refreshFrame">
-                    <i class="uk-icon-refresh"></i>
+                    <i class="uk-icon-refresh uk-icon-spin"></i>
                 </button>
 
 
