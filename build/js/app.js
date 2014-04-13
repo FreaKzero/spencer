@@ -5,6 +5,7 @@ requirejs.config({
     paths: {
         'jquery': 'vendor/jquery-1.10.2.min',
         'uikit': 'uikit',
+        'jqUtils': 'spencer/Ext',
         'spencerMain': 'spencer/Main',
         'spencerFrames': 'spencer/Frames',
         'spencerDevices': 'spencer/DeviceLoader',
@@ -14,38 +15,16 @@ requirejs.config({
 });
 
 
-require(['jquery', 'spencerDevices', 'spencerFrames', 'spencerErrors', 'spencerMain', 'uikit'],
-    function ($, spencerDevices, spencerFrames, spencerErrors, spencerMain, uikit) {
+require(['jquery', 'spencerDevices', 'spencerFrames', 'spencerErrors', 'spencerMain', 'uikit', 'jqUtils'],
+    function ($, spencerDevices, spencerFrames, spencerErrors, spencerMain, uikit, ext) {
 
-        var selectors = {
-            "frames": {
-                'frame': '.frame',
-                'resize': '.resizeFrame',
-                'rotate': '.rotateFrame',
-                'close': '.closeFrame',
-                'refresh': '.refreshFrame',
-                'width': '.frame-width',
-                'height': '.frame-height'
-            },
-            "main": {
-                'stencil': '.stencil',
-                'container': '#frames',
-                'dropdown': '#spawn',
-                'url': '#url',
-                'submit': '#go'
-            }
-        };
+        var url = window.location + "",
+            src = url.substring(0, url.lastIndexOf('/')) + "/spencer.js";
 
-        // Register Mains
-        spencerMain.register(selectors);
+        $('#spencerjsLink').val('<script type="text/javascript" src="' + src + '"></script>');
+
 
         // Register the Errorchecker
-        spencerErrors.register(selectors);
-
-        // Fill up the DevicesList
-        spencerDevices.register(selectors);
-
-        // Register Event Handlers for the Frames
-        spencerFrames.registerEvents(selectors);
+        spencerErrors.register();
 
     });

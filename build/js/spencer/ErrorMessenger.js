@@ -2,39 +2,26 @@
 /*global $, define, module */
 
 define(function (require, exports, module) {
+    var utils = require('js/spencer/Utils.js'),
+        selectors = require('js/data/selectors.js');
 
-
-    function writeSpencerLink() {
-
-        var url = window.location + "",
-            src = url.substring(0, url.lastIndexOf('/')) + "/spencer.js";
-
-        $('#spencerjsLink').val('<script type="text/javascript" src="' + src + '"></script>');
-
-    }
-
-    function register(selectors) {
-        writeSpencerLink();
-
+    function register() {
         $(document).on("checkErrors", function (event, frameID) {
-            var host = hostFromUrl($(selectors.main.url).val());
+            var host = utils.hostFromUrl($(selectors.main.url).val());
 
             if (host !== null) {
                 var frameWidth = $('#' + frameID).width(),
+                    useragent = $('#' + frameID).data('useragent'),
                     ifr = document.getElementById(frameID).contentWindow;
 
-                ifr.postMessage('SPENCER;' + frameWidth + ';' + frameID, host);
+                $('#' + frameID).parent('.frame').removeClass('frameerror');
+                ifr.postMessage('SPENCER|' + frameWidth + '|' + frameID, host);
             }
         });
     }
 
-    function hostFromUrl(url) {
-        var matches = url.match(/^(https?\:\/\/([^\/?#]+)(?:[\/?#]|$))/i);
-        return matches && matches[1];
-    }
-
     function getBounds(e) {
-        var d = e.data.split(';'),
+        var d = e.data.split('|'),
             frame = $('#' + d[1]).parent('.frame'),
             deviceWidth = frame.width();
 
@@ -42,9 +29,7 @@ define(function (require, exports, module) {
 
         if (d[0] > deviceWidth) {
             frame.addClass('frameerror');
-        } else {
-            frame.removeClass('frameerror');
-        }        
+        }
     }
 
     window.addEventListener('message', getBounds);

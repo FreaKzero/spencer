@@ -2,70 +2,64 @@
 /*global $, define, module */
 
 define(function (require, exports, module) {
+    var selectors = require('js/data/selectors.js');
 
+    $(document).on('click', selectors.frames.refresh, function () {
+        $(this).children().addClass('uk-icon-spin');
 
-    function registerEvents(selectors) {
+        var frame = $(this).parent().parent().parent(),
+            id = frame.find('iframe').prop('id'),
+            iframe = frame.find('iframe'),
+            src = $(selectors.main.url).val();
 
-        $(document).on('click', selectors.frames.refresh, function () {
-            $(this).children().addClass('uk-icon-spin');
+        iframe.prop('src', src);
 
-            var frame = $(this).parent().parent().parent(),
-                id = frame.find('iframe').prop('id'),
-                iframe = frame.find('iframe'),
-                src = $(selectors.main.url).val();
+    });
 
-            iframe.prop('src', src);
+    $(document).on('click', selectors.frames.close, function (event) {
+        event.preventDefault();
 
-        });
+        $(this).parent().parent().parent().fadeOut('slow', function () {
+            $(this).remove()
+        })
+    });
 
-        $(document).on('click', selectors.frames.close, function (event) {
-            event.preventDefault();
+    $(document).on('resizeFrame', function (event, elem, rotate) {
+        var settings = elem.parent().parent('.uk-form'),
+            width = settings.find(selectors.frames.width).val(),
+            height = settings.find(selectors.frames.height).val(),
+            frame = elem.parent().parent().parent().parent(),
+            iframe = frame.find('iframe');
 
-            $(this).parent().parent().parent().fadeOut('slow', function () {
-                $(this).remove()
-            })
-        });
+        if (rotate) {
+            var oh = height;
+            height = width;
+            width = oh;
 
-        $(document).on('resizeFrame', function (event, elem, rotate) {
-            var settings = elem.parent().parent('.uk-form'),
-                width = settings.find(selectors.frames.width).val(),
-                height = settings.find(selectors.frames.height).val(),
-                frame = elem.parent().parent().parent().parent(),
-                iframe = frame.find('iframe');
-                                                
-            if (rotate) {
-                var oh = height;
-                height = width;
-                width = oh;
+            settings.find(selectors.frames.height).val(height);
+            settings.find(selectors.frames.width).val(width);
+        }
 
-                settings.find(selectors.frames.height).val(height);
-                settings.find(selectors.frames.width).val(width);
-            }
-            
-            frame.animate({
+        frame.animate({
+            'height': height,
+            'width': width
+        }, 500, function () {
+            iframe.css({
                 'height': height,
                 'width': width
-            }, 500, function () {
-                iframe.css({
-                    'height': height,
-                    'width': width
-                });
-                
-                $(document).trigger("checkErrors", [iframe.prop('id')]);
-            });                        
-            
+            });
         });
 
-        $(document).on('click', selectors.frames.resize, function () {
-            $(document).trigger('resizeFrame', [$(this), false]);
-        });
+    });
 
-        $(document).on('click', selectors.frames.rotate, function () {
-            $(document).trigger('resizeFrame', [$(this), true]);
-        });
+    $(document).on('click', selectors.frames.resize, function () {
+        $(document).trigger('resizeFrame', [$(this), false]);
+    });
 
-    }
+    $(document).on('click', selectors.frames.rotate, function () {
+        $(document).trigger('resizeFrame', [$(this), true]);
+    });
 
-    exports.registerEvents = registerEvents;
+
 
 });

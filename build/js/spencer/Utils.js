@@ -7,6 +7,12 @@ define(function (require, exports, module) {
         return regexp.test(s);
     }
 
+    function hostFromUrl(url) {
+        var matches = url.match(/^(https?\:\/\/([^\/?#]+)(?:[\/?#]|$))/i);
+        return matches && matches[1];
+    }
+
     exports.validateUrl = validateUrl;
+    exports.hostFromUrl = hostFromUrl;
 
 });
