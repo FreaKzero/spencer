@@ -1,10 +1,11 @@
 /*jslint plusplus: true, vars: true, nomen: true, browser: true */
-/*global $, define, module */
+/*global define */
 
-define(function (require, exports, module) {
+define(function () {
     var selectors = {
         "frames": {
             'frame': '.frame',
+            'iframes': '.frame iframe',
             'resize': '.resizeFrame',
             'rotate': '.rotateFrame',
             'close': '.closeFrame',

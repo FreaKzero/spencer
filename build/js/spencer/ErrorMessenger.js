@@ -1,7 +1,7 @@
 /*jslint plusplus: true, vars: true, nomen: true, browser: true */
-/*global $, define, module */
+/*global $, define */
 
-define(function (require, exports, module) {
+define(function (require, exports) {
     var utils = require('js/spencer/Utils.js'),
         selectors = require('js/data/selectors.js');
 
@@ -11,7 +11,6 @@ define(function (require, exports, module) {
 
             if (host !== null) {
                 var frameWidth = $('#' + frameID).width(),
-                    useragent = $('#' + frameID).data('useragent'),
                     ifr = document.getElementById(frameID).contentWindow;
 
                 $('#' + frameID).parent('.frame').removeClass('frameerror');

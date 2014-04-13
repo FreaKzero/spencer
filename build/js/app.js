@@ -23,7 +23,6 @@ require(['jquery', 'spencerDevices', 'spencerFrames', 'spencerErrors', 'spencerM
 
         $('#spencerjsLink').val('<script type="text/javascript" src="' + src + '"></script>');
 
-
         // Register the Errorchecker
         spencerErrors.register();
 

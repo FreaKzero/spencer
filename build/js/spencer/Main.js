@@ -1,32 +1,54 @@
 /*jslint plusplus: true, vars: true, nomen: true, browser: true */
-/*global $, define, module */
+/*global $, define */
 
-define(function (require, exports) {
-    var utils = require('js/spencer/Utils.js');
-    var selectors = require('js/data/selectors.js');
+define(function (require) {
+    var utils = require('js/spencer/Utils.js'),
+        selectors = require('js/data/selectors.js'),
+        shiftmod = false;
 
-    $('#newWindow').on('click', function () {
-        window.open($('#url').val());
-    });
-
-    $('#go').on('click', function () {
-        var url = $('#url').val();
-        $('.refreshFrame').children().addClass('uk-icon-spin');
+    $(document).on("globalOpen", function () {
+        var url = $(selectors.main.url).val();
+        $(selectors.frames.refresh).children().addClass('uk-icon-spin');
 
         if (!utils.validateUrl(url)) {
-            $('#url').addClass('uk-form-danger');
+            $(selectors.main.url).addClass('uk-form-danger');
             return false;
         }
 
-        $('#url').removeClass('uk-form-danger');
+        $(selectors.main.url).removeClass('uk-form-danger');
         //            $('.uk-icon-spin').removeClass('uk-icon-spin');
 
-        $('.frame iframe').each(function (i, obj) {
+        $(selectors.frames.iframes).each(function () {
             var id = $(this).prop('id');
 
             if (id !== "") {
                 $(this).spencerFrame('redirect', url);
             }
         });
+    });
+
+    $('#newWindow').on('click', function () {
+        window.open($(selectors.main.url).val());
+    });
+
+    $(selectors.main.url).on('keydown', function (event) {
+        if (event.which === 16) {
+            shiftmod = true;
+        }
+
+        if (event.which === 13) {
+            if (shiftmod) {
+                window.open($(selectors.main.url).val());
+            } else {
+                $(document).trigger('globalOpen');
+            }
+
+        }
+    }).on('keyup', function (event) {
+        shiftmod = false;
+    });
+
+    $(selectors.main.submit).on('click', function () {
+        $(document).trigger('globalOpen');
     });
 });

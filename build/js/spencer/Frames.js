@@ -1,14 +1,56 @@
 /*jslint plusplus: true, vars: true, nomen: true, browser: true */
-/*global $, define, module */
+/*global $, define */
 
-define(function (require, exports, module) {
-    var selectors = require('js/data/selectors.js');
+define(function (require) {
+    var selectors = require('js/data/selectors.js'),
+        utils = require('js/spencer/Utils.js');
+
+    var devicelink = selectors.main.dropdown + " a";
+
+    $(document).on('click', devicelink, function (event) {
+        event.preventDefault();
+
+        var HTMLID = 'frame_' + $(selectors.frames.frame).size(),
+            width = $(this).data('spencer-w'),
+            height = $(this).data('spencer-h'),
+            nav = $(selectors.main.stencil).children(),
+            url = $(selectors.main.url).val();
+
+        nav.find(selectors.frames.width).val(width);
+        nav.find(selectors.frames.height).val(height);
+
+        var clone = $(selectors.main.stencil)
+            .clone()
+            .removeClass(selectors.main.stencil.substr(1))
+            .css({
+                'height': height,
+                'width': width
+            });
+
+        clone.find('iframe')
+            .prop('id', HTMLID)
+            .bind('load', function () {
+                $(document).trigger("checkErrors", [HTMLID]);
+                $(this).parent('.frame').find('.uk-icon-spin').removeClass('uk-icon-spin');
+            }).css({
+                'height': height,
+                'width': width
+            });
+
+        if (utils.validateUrl(url)) {
+            clone.find('iframe').prop('src', url);
+        } else {
+            clone.find('iframe').prop('src', 'start.html');
+        }
+
+
+        clone.appendTo(selectors.main.container).hide().fadeIn("slow");
+    });
 
     $(document).on('click', selectors.frames.refresh, function () {
         $(this).children().addClass('uk-icon-spin');
 
         var frame = $(this).parent().parent().parent(),
-            id = frame.find('iframe').prop('id'),
             iframe = frame.find('iframe'),
             src = $(selectors.main.url).val();
 
@@ -20,8 +62,8 @@ define(function (require, exports, module) {
         event.preventDefault();
 
         $(this).parent().parent().parent().fadeOut('slow', function () {
-            $(this).remove()
-        })
+            $(this).remove();
+        });
     });
 
     $(document).on('resizeFrame', function (event, elem, rotate) {
