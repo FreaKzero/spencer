@@ -1,0 +1,98 @@
+//
+// Component: Form
+//
+// ========================================================================
+
+
+// Variables
+// ========================================================================
+
+@form-height:                                   @global-height;
+@form-border:                                   #303030;
+@form-background:                               #3a3a3a;
+@form-color:                                    #FFFFFF;
+
+@form-focus-color:                              @global-color;
+
+@form-disabled-border:                          darken(#303030,10%);
+@form-disabled-background:                      darken(#3a3a3a,10%);
+@form-disabled-color:                           @global-muted-color;
+
+@form-placeholder-color:                        @global-muted-color;
+
+@form-gutter:                                   @global-margin;
+
+@form-legend-border:                            @global-border;
+@form-legend-font-size:                         round(@global-font-size * 1.28); // 18px
+@form-legend-line-height:                       round(@form-legend-font-size * 1.66); // 30px
+
+@form-small-height:                             @global-height-small;
+@form-large-height:                             @global-height-large;
+@form-small-font-size:                          round(@global-font-size * 0.85); // 12px
+@form-large-font-size:                          round(@global-font-size * 1.14); // 16px
+
+@form-blank-border:                             @global-border;
+
+@form-icon-width:                               @global-height;
+@form-icon-font-size:                           @global-font-size;
+@form-icon-color:                               @global-muted-color; 
+
+
+// Component
+// ========================================================================
+
+.hook-form() { border-radius: @global-border-radius; }
+
+// Focus state
+.hook-form-focus() {
+    border: 1px solid @global-link-color;
+    background-color: darken(#3a3a3a,10%);
+    
+}
+
+// Disabled state
+.hook-form-disabled() {}
+
+// Legend
+.hook-form-legend() {}
+
+
+// Validation states
+// ========================================================================
+
+//
+// Error state
+//
+
+.hook-form-danger() {    
+    background-color: #3a3a3a !important;  
+    border:1px solid @global-danger-gradient-bottom !important;
+    color:white !important; 
+}
+
+//
+// Success state
+//
+ 
+.hook-form-success() {
+    background-color: #3a3a3a !important;  
+    border:1px solid @global-success-gradient-bottom !important;
+    color:white !important; 
+}
+
+
+// Style modifiers
+// ========================================================================
+
+.hook-form-blank() {}
+.hook-form-blank-focus() {}
+
+
+// Miscellaneous
+// ========================================================================
+
+.hook-form-misc() {
+    button {
+        color: black;
+    }
+}

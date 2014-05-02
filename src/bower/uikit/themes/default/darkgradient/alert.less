@@ -1,0 +1,75 @@
+//
+// Component: Alert
+//
+// ========================================================================
+
+
+// Variables
+// ========================================================================
+
+@alert-margin-vertical:                         @global-margin;
+
+//
+// New
+//
+
+@alert-border:                                  fade(@alert-color, 30%);
+@alert-text-shadow:                             @global-text-shadow;
+
+@alert-success-border:                          fade(@alert-success-color, 30%);
+@alert-warning-border:                          fade(@alert-warning-color, 30%);
+@alert-danger-border:                           fade(@alert-danger-color, 30%);
+
+
+// Component
+// ========================================================================
+
+.hook-alert() {
+    border: 1px solid @alert-border;
+    border-radius: @global-border-radius;
+    text-shadow: 0 1px 0 @alert-text-shadow;
+    
+    background-image: -webkit-linear-gradient(top, darken(@global-primary-gradient-top,10%), darken(@global-primary-gradient-bottom,10%));
+    background-image: linear-gradient(to bottom, darken(@global-primary-gradient-top,10%), darken(@global-primary-gradient-bottom,10%)); 
+    color: @global-color;
+    
+}
+
+
+// Modifier: `uk-alert-success`
+// ========================================================================
+
+.hook-alert-success() { 
+    background-image: -webkit-linear-gradient(top, darken(@global-success-gradient-top,10%), darken(@global-success-gradient-bottom,10%));
+    background-image: linear-gradient(to bottom, darken(@global-success-gradient-top,10%), darken(@global-success-gradient-bottom,10%));
+    color: @global-color;
+    border-color: @alert-success-border; 
+}
+
+
+// Modifier: `uk-alert-warning`
+// ========================================================================
+
+.hook-alert-warning() {
+    background-image: -webkit-linear-gradient(top, darken(@global-warning-gradient-top,10%), darken(@global-warning-gradient-bottom,10%));
+    background-image: linear-gradient(to bottom, darken(@global-warning-gradient-top,10%), darken(@global-warning-gradient-bottom,10%));
+    color: @global-color;
+    border-color: @alert-warning-border; 
+}
+
+
+// Modifier: `uk-alert-danger`
+// ========================================================================
+
+.hook-alert-danger() { 
+     background-image: -webkit-linear-gradient(top, darken(@global-danger-gradient-top,10%), darken(@global-danger-gradient-bottom,10%));
+    background-image: linear-gradient(to bottom, darken(@global-danger-gradient-top,10%), darken(@global-danger-gradient-bottom,10%)); 
+    color: @global-color;
+    border-color: @alert-danger-border; 
+}
+
+
+// Miscellaneous
+// ========================================================================
+
+.hook-alert-misc() {}

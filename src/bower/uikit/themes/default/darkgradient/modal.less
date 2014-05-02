@@ -1,0 +1,61 @@
+//
+// Component: Modal
+//
+// ========================================================================
+
+
+// Variables
+// ========================================================================
+
+@modal-z-index:                                 (@global-z-index + 10);
+
+@modal-dialog-background:                       @global-background;
+
+
+// Component
+// ========================================================================
+
+.hook-modal() {}
+
+
+// Sub-object: `uk-modal-dialog`
+// ========================================================================
+
+.hook-modal-dialog() {
+    border-radius: @global-border-radius;
+    box-shadow: 0 0 10px rgba(0,0,0,0.3);
+}
+
+
+// Miscellaneous
+// ========================================================================
+
+.hook-modal-misc() {
+    .uk-modal {
+        -webkit-perspective: 1300px;
+        -moz-perspective: 1300px;
+        perspective: 1300px;
+    }
+
+    .uk-modal-dialog {
+        -webkit-transform-style: preserve-3d;
+        -moz-transform-style: preserve-3d;
+        transform-style: preserve-3d;
+        -webkit-transform: rotateY(-70deg);
+        -moz-transform: rotateY(-70deg);
+        -ms-transform: rotateY(-70deg);
+        transform: rotateY(-70deg);
+        -webkit-transition: all 0.3s;
+        -moz-transition: all 0.3s;
+        transition: all 0.3s;
+        opacity: 0; 
+    }
+
+    .uk-open .md-modal-dialog {
+        -webkit-transform: rotateY(0deg);
+        -moz-transform: rotateY(0deg);
+        -ms-transform: rotateY(0deg);
+        transform: rotateY(0deg);
+        opacity: 1;
+    }
+}
