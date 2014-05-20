@@ -11,19 +11,22 @@ requirejs.config({
         'spencerDevices': 'spencer/DeviceLoader',
         'spencerErrors': 'spencer/ErrorMessenger',
         'utils': 'spencer/Utils'
+    }, shim: {
+        'uikit': ['jquery']        
     }
 });
 
+define(['jquery'], function ($) {
+    require(['spencerDevices', 'spencerFrames', 'spencerErrors', 'spencerMain', 'uikit', 'jqUtils'],
+        function (spencerDevices, spencerFrames, spencerErrors, spencerMain, uikit, ext) {
 
-require(['jquery', 'spencerDevices', 'spencerFrames', 'spencerErrors', 'spencerMain', 'uikit', 'jqUtils'],
-    function ($, spencerDevices, spencerFrames, spencerErrors, spencerMain, uikit, ext) {
+            var url = window.location + "",
+                src = url.substring(0, url.lastIndexOf('/')) + "/spencer.js";
 
-        var url = window.location + "",
-            src = url.substring(0, url.lastIndexOf('/')) + "/spencer.js";
+            $('#spencerjsLink').val('<script type="text/javascript" src="' + src + '"></script>');
 
-        $('#spencerjsLink').val('<script type="text/javascript" src="' + src + '"></script>');
+            // Register the Errorchecker
+            spencerErrors.register();
 
-        // Register the Errorchecker
-        spencerErrors.register();
-
-    });
+        });
+});
