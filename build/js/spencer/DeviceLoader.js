@@ -15,15 +15,15 @@ define(function (require) {
         selectors = require('js/data/selectors.js');
 
     $.each(devices, function (key, obj) {
-        $(selectors.main.dropdown).append(buildOption(key, obj.width, obj.height, obj.icon));
+        $(selectors.main.dropdown).append(buildOption(key, obj.width, obj.height, obj.icon, obj.shortcut));
         
         $(document).bind('keydown',obj.shortcut, function(e){
             $(document).trigger('spawnFrame', [obj.width, obj.height]);
-        });        
+        });
     });
 
 
-    function buildOption(name, width, height, icon) {
-        return '<li><a href="#" data-spencer-w="' + width + '" data-spencer-h="' + height + '"><i class="' + icon + '"></i> ' + name + '</a></li>';
+    function buildOption(name, width, height, icon, shortcut) {
+        return '<li><a href="#" data-spencer-w="' + width + '" data-spencer-h="' + height + '"><i class="' + icon + '"></i> ' + name + '<br /><span class="meta">'+shortcut.toUpperCase()+'</span></a></li>';
     }
 });

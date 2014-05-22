@@ -25,6 +25,7 @@ define(['jquery'], function ($) {
             var url = window.location + "",
                 src = url.substring(0, url.lastIndexOf('/')) + "/spencer.js";
 
+            $('#url').focus();
             $('#spencerjsLink').val('<script type="text/javascript" src="' + src + '"></script>');
 
             // Register the Errorchecker
@@ -32,9 +33,16 @@ define(['jquery'], function ($) {
                                                             
             // Kill the Preloader
             setTimeout(function () {
-                $('#loader').fadeOut('slow', function() {
-                    $(this).remove();
-                })                
-	        }, 600);
+                 $('#loader').animate({
+                     width: '100px',
+                     height: '100px',
+                     left: '50%',
+                     top: '50%'
+                 }, 600, function() {
+                    $('#loader').fadeOut('slow', function() {
+                        $(this).remove();                        
+                    });
+                 });                
+	        }, 200);
         });
 });
