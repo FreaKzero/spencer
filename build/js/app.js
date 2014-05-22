@@ -27,6 +27,10 @@ define(['jquery'], function ($) {
 
             // Register the Errorchecker
             spencerErrors.register();
-
+            
+            // Kill the Preloader
+            setTimeout(function () {
+                $('#loader').fadeOut();
+	        }, 200);
         });
 });
