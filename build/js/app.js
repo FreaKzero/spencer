@@ -11,6 +11,7 @@ requirejs.config({
         'spencerFrames': 'spencer/Frames',
         'spencerDevices': 'spencer/DeviceLoader',
         'spencerErrors': 'spencer/ErrorMessenger',
+        'spencerShortcuts': 'spencer/Shortcuts',
         'utils': 'spencer/Utils'
     }, shim: {
         'uikit': ['jquery'],
@@ -19,7 +20,7 @@ requirejs.config({
 });
 
 define(['jquery'], function ($) {
-    require(['spencerDevices', 'spencerFrames', 'spencerErrors', 'spencerMain', 'jqUtils', 'uikit', 'hotkeys'],
+    require(['spencerDevices', 'spencerFrames', 'spencerErrors', 'spencerMain',  'jqUtils', 'spencerShortcuts', 'uikit', 'hotkeys'],
         function (spencerDevices, spencerFrames, spencerErrors, spencerMain, ext) {
 
             var url = window.location + "",
@@ -32,17 +33,8 @@ define(['jquery'], function ($) {
             spencerErrors.register();
                                                             
             // Kill the Preloader
-            setTimeout(function () {
-                 $('#loader').animate({
-                     width: '100px',
-                     height: '100px',
-                     left: '50%',
-                     top: '50%'
-                 }, 600, function() {
-                    $('#loader').fadeOut('slow', function() {
-                        $(this).remove();                        
-                    });
-                 });                
-	        }, 200);
+            setTimeout(function () {                 
+                $('#loader').addClass('loaded');                                                                                                      
+	        }, 666);
         });
 });

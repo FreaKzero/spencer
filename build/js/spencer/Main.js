@@ -30,24 +30,7 @@ define(function (require) {
     $('#newWindow').on('click', function () {
         window.open($(selectors.main.url).val());
     });
-
-    $(selectors.main.url).on('keydown', function (event) {
-        if (event.which === 16) {
-            shiftmod = true;
-        }
-
-        if (event.which === 13) {
-            if (shiftmod) {
-                window.open($(selectors.main.url).val());
-            } else {
-                $(document).trigger('globalOpen');
-            }
-
-        }
-    }).on('keyup', function (event) {
-        shiftmod = false;
-    });
-
+    
     $(selectors.main.submit).on('click', function () {
         $(document).trigger('globalOpen');
     });
