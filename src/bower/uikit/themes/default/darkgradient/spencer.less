@@ -1,0 +1,69 @@
+html, body { 
+  min-height: 100%; 
+}
+
+body {    
+  background-image: -webkit-radial-gradient(top, circle cover, @body-background-gradient1, @body-background-gradient2 80%);
+  background-image: -moz-radial-gradient(top, circle cover, @body-background-gradient1, @body-background-gradient2 80%);
+  background-image: -o-radial-gradient(top, circle cover, @body-background-gradient1, @body-background-gradient2 80%);
+  background-image: radial-gradient(top, circle cover, @body-background-gradient1, @body-background-gradient2 80%);
+
+}
+
+.frame {
+    border-right: 3px solid @dark-gradient-bottom;
+    border-bottom: 3px solid @dark-gradient-bottom;
+    background-color: @dark-gradient-bottom;
+}
+
+.frameerror {
+    border-right: 3px solid @global-danger-gradient-bottom;
+    border-bottom: 3px solid @global-danger-gradient-bottom;
+}
+.frameerror .uk-navbar {
+    color:white;
+    border-radius: 0 !important;
+    background-image: none;
+    
+    background: -moz-linear-gradient(top, @global-danger-gradient-top 0%, @global-danger-gradient-bottom 100%);    
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, @global-danger-gradient-top), color-stop(100%, @global-danger-gradient-bottom));    
+    background: -webkit-linear-gradient(top, @global-danger-gradient-top 0%, @global-danger-gradient-bottom 100%);    
+    background: -o-linear-gradient(top, @global-danger-gradient-top 0%, @global-danger-gradient-bottom 100%);    
+    background: -ms-linear-gradient(top, @global-danger-gradient-top 0%, @global-danger-gradient-bottom 100%);    
+    background: linear-gradient(to bottom, @global-danger-gradient-top 0%, @global-danger-gradient-bottom 100%);        
+}
+
+.frameerror .icon {
+    color:white !important;
+}
+
+.stencil {
+    display: none;
+}
+
+#loader { 
+    position:absolute; 
+    z-index:1000; 
+    background:url(@preloader-image) 50% 50% no-repeat @preloader-background; 
+    width:100%; 
+    height:100%; 
+    top:0; 
+    left:0
+}
+
+#loader.loaded {  
+  background:url(@preloader-image) 50% 120% no-repeat @preloader-background !important;
+  width: 0px !important;  
+  -webkit-transition: width 1.2s ease-in-out, background 0.3s ease-out;
+  -moz-transition: width 1.2s ease-in-out, background 0.3s ease-out; 
+  transition: width 1.2s ease-in-out, background 0.3s ease-out;
+}
+
+.closeFrame {
+    cursor: pointer;    
+    &:hover {
+        color: #fff;
+    }
+}
+
+
