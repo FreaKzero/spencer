@@ -3,8 +3,8 @@
 
 requirejs.config({
     paths: {
-        'jquery': 'vendor/jquery-1.10.2.min',        
-        'uikit': 'uikit',
+        'jquery': 'vendor/jquery-1.10.2.min',
+        'uikit': 'uikit.min',
         'jquery.hotkeys': 'jquery.hotkeys',
         'jqUtils': 'spencer/Ext',
         'spencerMain': 'spencer/Main',
@@ -13,28 +13,32 @@ requirejs.config({
         'spencerErrors': 'spencer/ErrorMessenger',
         'spencerShortcuts': 'spencer/Shortcuts',
         'utils': 'spencer/Utils'
-    }, shim: {
+    },
+    shim: {
         'uikit': ['jquery'],
-        'jquery.hotkeys' : ['jquery']
+        'jquery.hotkeys': ['jquery']
     }
 });
 
-define(['jquery'], function ($) {
-    require(['spencerDevices', 'spencerFrames', 'spencerErrors', 'spencerMain',  'jqUtils', 'spencerShortcuts', 'uikit', 'jquery.hotkeys'],
-        function (spencerDevices, spencerFrames, spencerErrors, spencerMain, ext) {
+define(['jquery'], function($) {
+    require(['spencerDevices', 'spencerFrames', 'spencerErrors', 'spencerMain', 'jqUtils', 'spencerShortcuts', 'uikit', 'jquery.hotkeys'],
+        function(spencerDevices, spencerFrames, spencerErrors, spencerMain, ext) {
 
             var url = window.location + "",
                 src = url.substring(0, url.lastIndexOf('/')) + "/spencer.js";
+
+            $.UIkit.tooltip.defaults.delay = 600;
+            $.UIkit.tooltip.defaults.animation = true;
 
             $('#url').focus();
             $('#spencerjsLink').val('<script type="text/javascript" src="' + src + '"></script>');
 
             // Register the Errorchecker
             spencerErrors.register();
-                                                            
+
             // Kill the Preloader
-            setTimeout(function () {                 
-                $('#loader').addClass('loaded');                                                                                                      
-	        }, 666);
+            setTimeout(function() {
+                $('#loader').addClass('loaded');
+            }, 666);
         });
 });

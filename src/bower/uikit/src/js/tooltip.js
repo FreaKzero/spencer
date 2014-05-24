@@ -1,4 +1,5 @@
-(function($, UI, $win) {
+//https://github.com/uikit/uikit/issues/85
+(function($, UI) {
 
     "use strict";
 
@@ -8,13 +9,11 @@
 
     var Tooltip = function(element, options) {
 
-        var $this = this, $element = $(element);
-
-        if($element.data("tooltip")) return;
+        var $this = this;
 
         this.options = $.extend({}, Tooltip.defaults, options);
 
-        this.element = $element.on({
+        this.element = $(element).on({
             "focus"     : function(e) { $this.show(); },
             "blur"      : function(e) { $this.hide(); },
             "mouseenter": function(e) { $this.show(); },
@@ -25,8 +24,6 @@
 
         // disable title attribute
         this.element.attr("data-cached-title", this.element.attr("title")).attr("title", "");
-
-        this.element.data("tooltip", this);
     };
 
     $.extend(Tooltip.prototype, {
@@ -112,9 +109,6 @@
                 if (tmppos.length == 2) tcss.left = (tmppos[1] == 'left') ? (pos.left) : ((pos.left + pos.width) - width);
             }
 
-
-            tcss.left -= $("body").position().left;
-
             tooltipdelay = setTimeout(function(){
 
                 $tooltip.css(tcss).attr("class", "uk-tooltip uk-tooltip-" + position);
@@ -151,12 +145,12 @@
 
             var axis = "";
 
-            if(left < 0 || ((left-$win.scrollLeft())+width) > window.innerWidth) {
-               axis += "x";
+            if(left < 0 || left+width > window.innerWidth) {
+                axis += "x";
             }
 
-            if(top < 0 || ((top-$win.scrollTop())+height) > window.innerHeight) {
-               axis += "y";
+            if(top < 0 || top+height > window.innerHeight) {
+                axis += "y";
             }
 
             return axis;
@@ -183,9 +177,8 @@
         var ele = $(this);
 
         if (!ele.data("tooltip")) {
-            var obj = new Tooltip(ele, UI.Utils.options(ele.attr("data-uk-tooltip")));
-            ele.trigger("mouseenter");
+            ele.data("tooltip", new Tooltip(ele, UI.Utils.options(ele.data("uk-tooltip")))).trigger("mouseenter");
         }
     });
 
-})(jQuery, jQuery.UIkit, jQuery(window));
+})(jQuery, jQuery.UIkit);

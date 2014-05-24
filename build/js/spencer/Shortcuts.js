@@ -1,14 +1,16 @@
 /*jslint plusplus: true, vars: true, nomen: true, browser: true */
 /*global $, define */
 
-define(function (require) {
+define(function(require) {
     var selectors = require('js/data/selectors.js');
+
+    $(document).bind('keydown', 'ctrl+shift+return', function(e) {
+        $(document).trigger('globalOpen');
+    });
     
-    $(selectors.main.url).on('keyup', null, 'return', function(){
-      $(document).trigger('globalOpen');        
-    });   
+    $(document).bind('keydown', 'alt+ctrl+return', function(e) {
+        window.open($(selectors.main.url).val());
+    });
     
-    $(selectors.main.url).on('keyup', null, 'shift+return', function(){
-      window.open($(selectors.main.url).val());
-    }); 
+
 });
