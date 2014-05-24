@@ -5,7 +5,7 @@ requirejs.config({
     paths: {
         'jquery': 'vendor/jquery-1.10.2.min',        
         'uikit': 'uikit',
-        'hotkeys': 'jquery.hotkeys',        
+        'jquery.hotkeys': 'jquery.hotkeys',
         'jqUtils': 'spencer/Ext',
         'spencerMain': 'spencer/Main',
         'spencerFrames': 'spencer/Frames',
@@ -15,12 +15,12 @@ requirejs.config({
         'utils': 'spencer/Utils'
     }, shim: {
         'uikit': ['jquery'],
-        'hotkeys' : ['jquery']        
+        'jquery.hotkeys' : ['jquery']
     }
 });
 
 define(['jquery'], function ($) {
-    require(['spencerDevices', 'spencerFrames', 'spencerErrors', 'spencerMain',  'jqUtils', 'spencerShortcuts', 'uikit', 'hotkeys'],
+    require(['spencerDevices', 'spencerFrames', 'spencerErrors', 'spencerMain',  'jqUtils', 'spencerShortcuts', 'uikit', 'jquery.hotkeys'],
         function (spencerDevices, spencerFrames, spencerErrors, spencerMain, ext) {
 
             var url = window.location + "",
