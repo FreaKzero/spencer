@@ -13,11 +13,7 @@ requirejs.config({
         'spencerErrors': 'spencer/ErrorMessenger',
         'spencerShortcuts': 'spencer/Shortcuts',
         'utils': 'spencer/Utils'
-    },
-    shim: {
-        'uikit': ['jquery'],
-        'jquery.hotkeys': ['jquery']
-    }
+    }    
 });
 
 define(['jquery'], function($) {
@@ -30,15 +26,26 @@ define(['jquery'], function($) {
             $.UIkit.tooltip.defaults.delay = 600;
             $.UIkit.tooltip.defaults.animation = true;
 
-            $('#url').focus();
             $('#spencerjsLink').val('<script type="text/javascript" src="' + src + '"></script>');
 
             // Register the Errorchecker
             spencerErrors.register();
 
-            // Kill the Preloader
+            // Kill the Preloader            
             setTimeout(function() {
-                $('#loader').addClass('loaded');
-            }, 666);
+
+                $("#loadermsg").animate({
+                    opacity: 0,
+                    top: "+=50",
+                }, 666, function() {
+                    $(this).remove();
+                    
+                    $("#loader").animate({                        
+                        height: "0",
+                    }, 666, function() {                        
+                        $(this).remove();
+                    });
+                });
+            }, 100);
         });
 });
