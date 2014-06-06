@@ -13,7 +13,7 @@ requirejs.config({
         'spencerErrors': 'spencer/ErrorMessenger',
         'spencerShortcuts': 'spencer/Shortcuts',
         'utils': 'spencer/Utils'
-    }    
+    }
 });
 
 define(['jquery'], function($) {
@@ -39,10 +39,10 @@ define(['jquery'], function($) {
                     top: "+=50",
                 }, 666, function() {
                     $(this).remove();
-                    
-                    $("#loader").animate({                        
+
+                    $("#loader").animate({
                         height: "0",
-                    }, 666, function() {                        
+                    }, 666, function() {
                         $(this).remove();
                     });
                 });

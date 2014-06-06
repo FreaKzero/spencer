@@ -1,13 +1,17 @@
 /*jslint plusplus: true, vars: true, nomen: true, browser: true */
 /*global $, define */
 
-define(function (require) {
+define(function(require) {
     var utils = require('js/spencer/Utils.js'),
         selectors = require('js/data/selectors.js'),
-        shiftmod = false;
+        qrcode = require('js/vendor/qrcode.js');
 
-    $(document).on("globalOpen", function () {
+    qrcode.init(document.getElementById('qrcode'));
+
+
+    $(document).on("globalOpen", function() {
         var url = $(selectors.main.url).val();
+
         $(selectors.frames.refresh).children().addClass('uk-icon-spin');
 
         if (!utils.validateUrl(url)) {
@@ -15,10 +19,11 @@ define(function (require) {
             return false;
         }
 
+        qrcode.makeQR(url);
         $(selectors.main.url).removeClass('uk-form-danger');
         //            $('.uk-icon-spin').removeClass('uk-icon-spin');
 
-        $(selectors.frames.iframes).each(function () {
+        $(selectors.frames.iframes).each(function() {
             var id = $(this).prop('id');
 
             if (id !== "") {
@@ -27,11 +32,11 @@ define(function (require) {
         });
     });
 
-    $('#newWindow').on('click', function () {
+    $('#newWindow').on('click', function() {
         window.open($(selectors.main.url).val());
     });
-    
-    $(selectors.main.submit).on('click', function () {
+
+    $(selectors.main.submit).on('click', function() {
         $(document).trigger('globalOpen');
     });
 });

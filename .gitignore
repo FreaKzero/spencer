@@ -1,3 +1,4 @@
 node_modules/
 src/bower/jquery/
 src/bower/requirejs/
+/src/bower/qrcodejs/
