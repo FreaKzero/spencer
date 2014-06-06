@@ -786,7 +786,7 @@
                 var $target = $(e.target);
 
                 if (!$target.parents(".uk-dropdown").length) {
-                    
+
                     if ($target.is("a[href='#']") || $target.parent().is("a[href='#']")){
                         e.preventDefault();
                     }
@@ -1203,11 +1203,11 @@
         },
 
         resize: function() {
-            
+
             var paddingdir = "padding-" + (UI.langdirection == 'left' ? "right":"left");
 
             this.scrollbarwidth = window.innerWidth - html.width();
-            
+
             html.css(paddingdir, this.scrollbarwidth);
 
             this.element.css(paddingdir, "");

@@ -1,12 +1,13 @@
 #SPENCER
 WebApp to test Responsive Websites (JavaScript/HTML Only)
-*Learning Project for me using **requireJS** with **jQuery***
+Learning Project for me using **requireJS** with **jQuery**
 
 ###Used Frameworks
 
-* uikit  
 * jQuery  
 * requireJS
+* [uikit][1]  
+* [qrcode.js][2]
 
 ###Features
 
@@ -22,6 +23,8 @@ WebApp to test Responsive Websites (JavaScript/HTML Only)
 ###Todo
 * Different ErrorCheckers for Foreign Sites and SameDomain sites
 * Only try to "Test" Sites when allowed (Snipplet or same Domain)
-* Own uikit Theme
 * Auto Refresh Frames
-* Keyboard Shortcuts
+
+
+  [1]: https://github.com/uikit/uikit
+  [2]: https://github.com/davidshimjs/qrcodejs

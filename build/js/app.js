@@ -1,24 +1,30 @@
 /*jslint plusplus: true, vars: true, nomen: true, browser: true */
-/*global requirejs, require */
+/*global requirejs, require, define */
 
 requirejs.config({
     paths: {
         'jquery': 'vendor/jquery-1.10.2.min',
-        'uikit': 'uikit.min',
-        'jquery.hotkeys': 'jquery.hotkeys',
-        'jqUtils': 'spencer/Ext',
+        'jquery.uikit': 'jquery/uikit',
+        'jquery.hotkeys': 'jquery/jquery.hotkeys',
+        'jquery.spencerframe': 'jquery/jquery.spencerframe',
+
         'spencerMain': 'spencer/Main',
         'spencerFrames': 'spencer/Frames',
         'spencerDevices': 'spencer/DeviceLoader',
         'spencerErrors': 'spencer/ErrorMessenger',
         'spencerShortcuts': 'spencer/Shortcuts',
         'utils': 'spencer/Utils'
+
+    }, "shim": {
+        "jquery.hotkeys": ["jquery"],
+        "jquery.uikit": ["jquery"],
+        "jquery.spencerframe": ["jquery"]
     }
 });
 
-define(['jquery'], function($) {
-    require(['spencerDevices', 'spencerFrames', 'spencerErrors', 'spencerMain', 'jqUtils', 'spencerShortcuts', 'uikit', 'jquery.hotkeys'],
-        function(spencerDevices, spencerFrames, spencerErrors, spencerMain, ext) {
+define(['jquery', 'jquery.hotkeys', 'jquery.uikit'], function($) {
+    require(['spencerDevices', 'spencerFrames', 'spencerErrors', 'spencerMain', 'spencerShortcuts'],
+        function(spencerDevices, spencerFrames, spencerErrors, spencerMain) {
 
             var url = window.location + "",
                 src = url.substring(0, url.lastIndexOf('/')) + "/spencer.js";

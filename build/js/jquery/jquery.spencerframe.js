@@ -15,11 +15,6 @@
 
         redirect: function (url) {
             $(this).prop('src', url);
-        },
-
-        fakeUserAgent: function(url) {
-            var url = url + "?spencerUA=" + $(this).data('spencer-ua');
-            $(this).prop('src', url);
         }
     };
 
