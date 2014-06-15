@@ -18,7 +18,7 @@ define(function (require, exports) {
             }
         });
     }
-
+// TODO Confusing Function Name
     function getBounds(e) {
         var d = e.data.split('|'),
             frame = $('#' + d[1]).parent('.frame'),
@@ -28,6 +28,9 @@ define(function (require, exports) {
 
         if (d[0] > deviceWidth) {
             frame.addClass('frameerror');
+            $.growl.error({
+                message : 'Found CSS Bounding Errors'
+            });
         }
     }
 

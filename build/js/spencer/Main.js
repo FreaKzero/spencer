@@ -6,8 +6,7 @@ define(function(require) {
         selectors = require('js/data/selectors.js'),
         qrcode = require('js/vendor/qrcode.js');
 
-    qrcode.init(document.getElementById('qrcode'));
-
+    qrcode.init(document.getElementById('qrcode'), $(selectors.main.url).val());
 
     $(document).on("globalOpen", function() {
         var url = $(selectors.main.url).val();
@@ -18,10 +17,9 @@ define(function(require) {
             $(selectors.main.url).addClass('uk-form-danger');
             return false;
         }
-
+                
         qrcode.makeQR(url);
-        $(selectors.main.url).removeClass('uk-form-danger');
-        //            $('.uk-icon-spin').removeClass('uk-icon-spin');
+        $(selectors.main.url).removeClass('uk-form-danger');        
 
         $(selectors.frames.iframes).each(function() {
             var id = $(this).prop('id');
@@ -30,12 +28,10 @@ define(function(require) {
                 $(this).spencerFrame('redirect', url);
             }
         });
+        
+        $(selectors.main.url).blur();
     });
-
-    $('#newWindow').on('click', function() {
-        window.open($(selectors.main.url).val());
-    });
-
+    
     $(selectors.main.submit).on('click', function() {
         $(document).trigger('globalOpen');
     });

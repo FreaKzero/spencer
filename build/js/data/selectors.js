@@ -11,7 +11,8 @@ define(function () {
             'close': '.closeFrame',
             'refresh': '.refreshFrame',
             'width': '.frame-width',
-            'height': '.frame-height'
+            'height': '.frame-height',
+            'debug' : '.debugFrame'
         },
         "main": {
             'stencil': '.stencil',
@@ -19,6 +20,13 @@ define(function () {
             'dropdown': '#spawn',
             'url': '#url',
             'submit': '#go'
+        },
+        "settings": {
+            'home' : '#settings-home',
+            'actualurl': '#settings-actualurl',
+            'save' : '#settings-save',
+            'cancel' : '#settings-cancel',
+            'growl' :  '#settings-growl'            
         }
     };
 

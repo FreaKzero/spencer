@@ -1,15 +1,15 @@
 /*jslint plusplus: true, vars: true, nomen: true, browser: true */
 /*global $, define */
 
-define(function (require) {
+define(function(require) {
     var selectors = require('js/data/selectors.js'),
         utils = require('js/spencer/Utils.js'),
         devicelink = selectors.main.dropdown + " a";
-    
-    $(document).on('click', selectors.frames.refresh, function () {
+
+    $(document).on('click', selectors.frames.refresh, function() {
         $(this).children().addClass('uk-icon-spin');
 
-        var frame = $(this).parent().parent().parent(),
+        var frame = $(this).parent().parent().parent().parent(),
             iframe = frame.find('iframe'),
             src = $(selectors.main.url).val();
 
@@ -17,17 +17,17 @@ define(function (require) {
 
     });
 
-    $(document).on('click', selectors.frames.close, function (event) {
+    $(document).on('click', selectors.frames.close, function(event) {
         event.preventDefault();
 
-        $(this).parent().parent().parent().fadeOut('slow', function () {
+        $(this).parent().parent().parent().fadeOut('slow', function() {
             $(this).remove();
         });
     });
 
-    
-    $(document).on('spawnFrame', function (event, width, height) {        
-        var HTMLID = 'frame_' + $(selectors.frames.frame).size(),            
+
+    $(document).on('spawnFrame', function(event, width, height) {
+        var HTMLID = 'frame_' + $(selectors.frames.frame).size(),
             nav = $(selectors.main.stencil).children(),
             url = $(selectors.main.url).val();
 
@@ -44,9 +44,12 @@ define(function (require) {
 
         clone.find('iframe')
             .prop('id', HTMLID)
-            .bind('load', function () {
+            .bind('mouseleave', function() {                
+                $('*').blur();
+            }).bind('load', function() {
                 $(document).trigger("checkErrors", [HTMLID]);
                 $(this).parent('.frame').find('.uk-icon-spin').removeClass('uk-icon-spin');
+                $('*').blur();
             }).css({
                 'height': height,
                 'width': width
@@ -61,8 +64,8 @@ define(function (require) {
 
         clone.appendTo(selectors.main.container).hide().fadeIn("slow");
     });
-    
-    $(document).on('resizeFrame', function (event, elem, rotate) {
+
+    $(document).on('resizeFrame', function(event, elem, rotate) {
         var settings = elem.parent().parent('.uk-form'),
             width = settings.find(selectors.frames.width).val(),
             height = settings.find(selectors.frames.height).val(),
@@ -81,25 +84,30 @@ define(function (require) {
         frame.animate({
             'height': height,
             'width': width
-        }, 500, function () {
+        }, 500, function() {
             iframe.css({
                 'height': height,
                 'width': width
             });
         });
-
     });
 
-    $(document).on('click', devicelink, function (event) { 
-        event.preventDefault();                        
+    $(document).on('click', selectors.frames.debug, function() {
+        var viewport = $(this).parent().parent().find('.frame-width').val();           
+         alert("event fired");
+        //window.open($(selectors.main.url).val());
+    });
+
+    $(document).on('click', devicelink, function(event) {
+        event.preventDefault();
         $(document).trigger('spawnFrame', [$(this).data('spencer-w'), $(this).data('spencer-h')]);
     });
-        
-    $(document).on('click', selectors.frames.resize, function () {
+
+    $(document).on('click', selectors.frames.resize, function() {
         $(document).trigger('resizeFrame', [$(this), false]);
     });
 
-    $(document).on('click', selectors.frames.rotate, function () {
+    $(document).on('click', selectors.frames.rotate, function() {
         $(document).trigger('resizeFrame', [$(this), true]);
     });
 

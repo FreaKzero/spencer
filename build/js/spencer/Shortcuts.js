@@ -4,7 +4,7 @@
 define(function(require) {
     var selectors = require('js/data/selectors.js');
 
-    $(document).bind('keyup', 'ctrl+shift+return', function() {
+    $(document).bind('keyup', 'ctrl+shift+r', function() {
         $(document).trigger('globalOpen');
     });
     
@@ -14,9 +14,5 @@ define(function(require) {
     
     $(document).bind('keyup', 'return', function() {
         $('#url').focus();
-    });
-    
-    $(document).bind('keyup', 'alt+ctrl+return', function() {
-        window.open($(selectors.main.url).val());
     });
 });

@@ -7,33 +7,34 @@ requirejs.config({
         'jquery.uikit': 'jquery/uikit',
         'jquery.hotkeys': 'jquery/jquery.hotkeys',
         'jquery.spencerframe': 'jquery/jquery.spencerframe',
+        'jquery.storage': 'jquery/jquery.storage',
+        'jquery.growl': 'jquery/jquery.growl',
 
         'spencerMain': 'spencer/Main',
         'spencerFrames': 'spencer/Frames',
         'spencerDevices': 'spencer/DeviceLoader',
         'spencerErrors': 'spencer/ErrorMessenger',
         'spencerShortcuts': 'spencer/Shortcuts',
+        'spencerSettings': 'spencer/Settings',
         'utils': 'spencer/Utils'
 
-    }, "shim": {
-        "jquery.hotkeys": ["jquery"],
-        "jquery.uikit": ["jquery"],
-        "jquery.spencerframe": ["jquery"]
+    },
+    "shim": {
+        'jquery.hotkeys': ['jquery'],
+        'jquery.uikit': ['jquery'],
+        'jquery.spencerframe': ['jquery'],
+        'jquery.storage': ['jquery'],
+        'jquery.growl': ['jquery']
     }
 });
 
-define(['jquery', 'jquery.hotkeys', 'jquery.uikit'], function($) {
-    require(['spencerDevices', 'spencerFrames', 'spencerErrors', 'spencerMain', 'spencerShortcuts'],
+define(['jquery', 'jquery.hotkeys', 'jquery.uikit', 'jquery.spencerframe', 'jquery.storage', 'jquery.growl'], function($) {
+    require(['spencerDevices', 'spencerFrames', 'spencerErrors', 'spencerMain', 'spencerShortcuts', 'spencerSettings'],
         function(spencerDevices, spencerFrames, spencerErrors, spencerMain) {
-
-            var url = window.location + "",
-                src = url.substring(0, url.lastIndexOf('/')) + "/spencer.js";
-
+            
             $.UIkit.tooltip.defaults.delay = 600;
             $.UIkit.tooltip.defaults.animation = true;
-
-            $('#spencerjsLink').val('<script type="text/javascript" src="' + src + '"></script>');
-
+        
             // Register the Errorchecker
             spencerErrors.register();
 

@@ -5,14 +5,36 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title></title>
-    <link rel="stylesheet" href="css/uikit.darkgradient.min.css">        
+    <link rel="stylesheet" href="css/uikit.darkgradient.min.css">
+    <style type="text/css">        
+        #growls {
+            z-index: 50000;
+            position: fixed;
+            width: 400px;
+            bottom: 10px;
+            right: 10px;
+        }
+        .uk-alert {                                
+            -webkit-transition: all 0.4s ease-in-out;
+            -moz-transition: all 0.4s ease-in-out;
+            transition: all 0.4s ease-in-out;
+        }
+        .uk-alert.uk-alert-incoming {
+            opacity: 0;
+        }
+        .uk-alert.uk-alert-outgoing {
+            opacity: 0;            
+        }
+    </style>
 </head>
 
 <body>
     <div id="loader">
-        <div id="loadermsg"><div id="spinner"></div><p>Spencer is loading</p></div>
-    </div>
-    
+        <div id="loadermsg">
+            <div id="spinner"></div>
+            <p>Spencer is loading</p>
+        </div>
+    </div>    
     <nav class="uk-navbar uk-navbar-attached">
 
         <a class="uk-navbar-brand" href="#">Spencer</a>
@@ -27,16 +49,11 @@
                 <div class="uk-button-group">
                     <button id="go" class="uk-button uk-button-primary" data-uk-tooltip="" title="CTRL+SHIFT+RETURN">
                         <i class="uk-icon-crosshairs"></i>&nbsp;Devices</button>
-                    <button id="newWindow" class="uk-button uk-button-primary" data-uk-tooltip="" title="ALT+CTRL+RETURN">
-                        <i class="uk-icon-globe"></i>&nbsp;Browser</button>
-
                     <button id="newWindow" class="uk-button uk-button-primary" data-uk-modal="{target:'#qrmodal'}">
                         <i class="uk-icon-qrcode"></i>&nbsp;QR-Code</button>
-
                 </div>
             </div>
         </div>
-
         <div class="uk-navbar-content uk-navbar-flip">
             <div class="uk-button-group">
                 <div class="uk-button-dropdown" data-uk-dropdown="{mode:'click'}">
@@ -50,8 +67,8 @@
                         </ul>
                     </div>
                 </div>
-                <button class="uk-button uk-button-success" data-uk-modal="{target:'#scriptmodal'}">
-                    <i class="uk-icon-code"></i>
+                <button class="uk-button uk-button-success" data-uk-modal="{target:'#settingsModal'}">
+                    <i class="uk-icon-gear"></i>
                 </button>
 
             </div>
@@ -65,7 +82,7 @@
             <div class="uk-form uk-margin-remove uk-display-inline-block">
                 <input type="number" min="200" max="1200" step="10" style="width: 50px" class="frame-width uk-form-small" />&nbsp;x
                 <input type="number" min="200" max="1200" step="10" style="width: 50px" class="frame-height uk-form-small" />&nbsp;
-                <div class="uk-button-group" style="margin-right: 15px;">
+                <div class="uk-button-group" style="margin-right: 5px;">
                     <button class="uk-button uk-button-small resizeFrame" data-uk-tooltip="" title="Resize Device">
                         <i class="uk-icon-arrows-alt"></i>
                     </button>
@@ -73,13 +90,18 @@
                         <i class="uk-icon-rotate-right"></i>
                     </button>
                 </div>
-                <button class="uk-button uk-button-small refreshFrame" data-uk-tooltip="" title="Refresh Device">
-                    <i class="uk-icon-refresh uk-icon-spin"></i>
-                </button>
 
+                <div class="uk-button-group">
+                    <button class="uk-button uk-button-small debugFrame" data-uk-tooltip="" title="Debug View">
+                        <i class="uk-icon-bug"></i>
+                    </button>
 
+                    <button class="uk-button uk-button-small refreshFrame" data-uk-tooltip="" title="Refresh Device">
+                        <i class="uk-icon-refresh uk-icon-spin"></i>
+                    </button>
+                </div>
             </div>
-            <div class="uk-navbar-flip" style="margin: 2px 10px 0 0;">                
+            <div class="uk-navbar-flip" style="margin: 2px 10px 0 0;">
                 <i class="uk-icon-times closeFrame icon" data-uk-tooltip="" title="Close Device"></i>
             </div>
         </div>
@@ -89,21 +111,63 @@
     <div id="qrmodal" class="uk-modal">
         <div class="uk-modal-dialog" style="width:300px">
             <a class="uk-modal-close uk-close"></a>
-            <center><div id="qrcode"></div></center>
+            <center>
+                <div id="qrcode"></div>
+            </center>
         </div>
     </div>
 
-    <div id="scriptmodal" class="uk-modal">
+    <div id="settingsModal" class="uk-modal">
         <div class="uk-modal-dialog">
             <a class="uk-modal-close uk-close"></a>
-            <h2>See Errors with spencer.js</h2>
-            <p>To Enable Errortesting for Spencer Please insert this CodeSnipplet into the Site you want to Test.</p>            
-            <br />
-            <div class="uk-form uk-margin-remove uk-display-inline-block">
-                <textarea class="uk-form" cols="63" rows="5" id="spencerjsLink">
-                </textarea>
-            <strong>Spencer Version: 0.1</strong> | Made with uikit, jQuery and &hearts; by FreaKzero
+
+            <div>
+                <ul class="uk-tab" data-uk-tab="{connect:'#tab-content'}">
+                    <li class="uk-active"><a href="#">Errorchecker</a>
+                    </li>
+                    <li><a href="#">Devices</a>
+                    </li>
+                    <li><a href="#">Settings</a>
+                    </li>
+                </ul>
             </div>
+
+            <ul id="tab-content" class="uk-switcher uk-margin">
+                <li class="uk-active">
+                    <h2 class="uk-article-title">Errorchecker</h2>
+                    <p>To Enable Errortesting for Spencer Please insert this CodeSnipplet into the Site you want to Test.</p>
+                    <br />
+                    <div class="uk-form uk-margin-remove uk-display-inline-block">
+                        <textarea cols="60" rows="5" id="spencerjsLink">
+                        </textarea>
+                        <strong>Spencer Version: 0.1</strong> | Made with uikit, jQuery and &hearts; by FreaKzero
+                    </div>
+                </li>
+                <li>
+                    <h2 class="uk-article-title">Devices CRUD</h2> 
+                </li>
+                <li>
+                    <h2 class="uk-article-title">Settings</h2> 
+                    <div class="uk-form uk-form-stacked">
+                        <label class="uk-form-label" for="settings-home">Default URL:</label>
+                        <input class="uk-form-width-large" type="text" id="settings-home" />
+                        <button id="settings-actualurl" class="uk-button" title="Use actual URL">
+                        <i class="uk-icon-globe"></i></button>
+                        <br />
+                        <br />
+                        <label class="uk-form-label" for="settings-growl">Notification Time</label>
+                        <input class="uk-form-width-large" type="text" id="settings-growl" value="3200" />
+                        <br />
+                        <br />
+                        <div class="uk-clearfix">
+                            <div class="uk-align-right">
+                                <button id="settings-save" class="uk-button">Save</button>
+                                <button id="settings-cancel" class="uk-button uk-modal-close">Cancel</button>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
         </div>
     </div>
     <script src="js/vendor/require.js" data-main="js/app.js"></script>

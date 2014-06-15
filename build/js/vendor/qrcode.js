@@ -613,8 +613,8 @@ var QRCode;
     var wrapper = {},
     instance;
 
-    wrapper.init= function(element) {
-        instance = new QRCode(element, 'http://localhost');
+    wrapper.init= function(element, url) {
+        instance = new QRCode(element, url);
         return instance;
     }
 
