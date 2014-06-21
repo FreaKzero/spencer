@@ -1,6 +1,9 @@
 /*jslint plusplus: true, vars: true, nomen: true, browser: true */
 /*global requirejs, require, define */
 
+
+
+// TODO http://stackoverflow.com/questions/11458403/firefox-like-inspecting-element
 requirejs.config({
     paths: {
         'jquery': 'vendor/jquery-1.10.2.min',
@@ -31,14 +34,9 @@ requirejs.config({
 define(['jquery', 'jquery.hotkeys', 'jquery.uikit', 'jquery.spencerframe', 'jquery.storage', 'jquery.growl'], function($) {
     require(['spencerDevices', 'spencerFrames', 'spencerErrors', 'spencerMain', 'spencerShortcuts', 'spencerSettings'],
         function(spencerDevices, spencerFrames, spencerErrors, spencerMain) {
-            
-            $.UIkit.tooltip.defaults.delay = 600;
-            $.UIkit.tooltip.defaults.animation = true;
-        
-            // Register the Errorchecker
-            spencerErrors.register();
-
-            // Kill the Preloader            
+                            
+    
+            // Kill the Preloader
             setTimeout(function() {
 
                 $("#loadermsg").animate({

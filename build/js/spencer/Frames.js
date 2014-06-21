@@ -71,7 +71,7 @@ define(function(require) {
             height = settings.find(selectors.frames.height).val(),
             frame = elem.parent().parent().parent().parent(),
             iframe = frame.find('iframe');
-
+        
         if (rotate) {
             var oh = height;
             height = width;
@@ -88,12 +88,14 @@ define(function(require) {
             iframe.css({
                 'height': height,
                 'width': width
-            });
+            });                        
+         
+            $(document).trigger('errorReCheck', [iframe.prop('id')]);
         });
     });
 
     $(document).on('click', selectors.frames.debug, function() {
-        var viewport = $(this).parent().parent().find('.frame-width').val();           
+        var viewport = $(this).parent().parent().find('.frame-width').val();
          alert("event fired");
         //window.open($(selectors.main.url).val());
     });

@@ -1,40 +1,76 @@
 /*jslint plusplus: true, vars: true, nomen: true, browser: true */
 /*global $, define */
 
-define(function (require, exports) {
+// TODO Make Tokenizer system
+// TODO fucking use Selectors.js
+// TODO "Hai Script, are you there ?"
+
+
+define(function(require) {
     var utils = require('js/spencer/Utils.js'),
-        selectors = require('js/data/selectors.js');
+        selectors = require('js/data/selectors.js'),        
+        scriptAvailable = false,
+        storage = $.localStorage;        
 
-    function register() {
-        $(document).on("checkErrors", function (event, frameID) {
-            var host = utils.hostFromUrl($(selectors.main.url).val());
+    $(document).on("checkErrors", function(event, frameID) {
+        var host = utils.hostFromUrl($(selectors.main.url).val()),
+            $frame = $('#' + frameID);
 
-            if (host !== null) {
-                var frameWidth = $('#' + frameID).width(),
-                    ifr = document.getElementById(frameID).contentWindow;
+        if (host !== null) {
+            var frameWidth = $frame.width(),
+                ifr = document.getElementById(frameID).contentWindow;
 
-                $('#' + frameID).parent('.frame').removeClass('frameerror');
-                ifr.postMessage('SPENCER|' + frameWidth + '|' + frameID, host);
-            }
-        });
-    }
-// TODO Confusing Function Name
-    function getBounds(e) {
-        var d = e.data.split('|'),
-            frame = $('#' + d[1]).parent('.frame'),
-            deviceWidth = frame.width();
+            $frame.parent('.frame').removeClass('frameerror');
 
-        $('#url').val(d[2]);
+            var data = JSON.stringify({
+                source: 'SPENCER',
+                viewPort: frameWidth,
+                frameID: frameID,
+                action: 'initCheck'
+            });
 
-        if (d[0] > deviceWidth) {
-            frame.addClass('frameerror');
+            ifr.postMessage(data, host);
+
+            setTimeout(function() {
+                if (scriptAvailable === false) {
+                    $.growl.error({
+                        title: 'Cant find spencer.js on Testsite',
+                        message: 'Debugging/Error Reporting not available'
+                    });
+                }
+            }, storage.get('settings.scriptCheck'));
+        }
+    });
+
+    $(document).on('errorReCheck', function(event, frameID) {
+        var ifr = document.getElementById(frameID).contentWindow,
+            host = utils.hostFromUrl($(selectors.main.url).val());
+
+        if (host !== null) {
+            ifr.postMessage(JSON.stringify({
+                source: 'SPENCER',
+                action: 'reCheck'
+            }), host);
+        }
+    });
+
+    function receiveErrors(e) {
+        var message = JSON.parse(e.data),
+            $frame = $('#' + message.frameID).parent('.frame');
+
+        scriptAvailable = true;
+
+        $('#url').val(message.currentLocation);
+
+        if (message.errorCount > 0) {
+            $frame.addClass('frameerror');
+
             $.growl.error({
-                message : 'Found CSS Bounding Errors'
+                title: 'Found CSS Bounding Errors',
+                message: message.errorCount + ' Errors Found on ' + message.frameID
             });
         }
     }
 
-    window.addEventListener('message', getBounds);
-
-    exports.register = register;
+    window.addEventListener('message', receiveErrors);
 });

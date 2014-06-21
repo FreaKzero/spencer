@@ -26,7 +26,8 @@ define(function () {
             'actualurl': '#settings-actualurl',
             'save' : '#settings-save',
             'cancel' : '#settings-cancel',
-            'growl' :  '#settings-growl'            
+            'growl' :  '#settings-growl',
+            'scriptcheck' :  '#settings-scriptcheck'
         }
     };
 

@@ -1,0 +1,1 @@
+.spencerError:hover .spencerErrorInfo{display:block;}.spencerError{background: rgba(255,0,0,0.2); border: 1px solid red; } .spencerErrorInfo {color:white;font-size:11px;font-family:Monospace;width:260px;padding:5px;margin:5px 0 0 5px;border:1px solid grey;border-radius: 3px; background:linear-gradient(to bottom, #ec4458 0%, #c31c3a 100%);display:none;}
