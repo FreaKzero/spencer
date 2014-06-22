@@ -33,12 +33,17 @@ define(function(require) {
 
             setTimeout(function() {
                 if (scriptAvailable === false) {
-                    $.growl.error({
+                    $.growl.warning({
                         title: 'Cant find spencer.js on Testsite',
                         message: 'Debugging/Error Reporting not available'
                     });
                 }
             }, storage.get('settings.scriptCheck'));
+        } else {
+            $.growl.warning({
+                title: 'Host Error',
+                message: 'Cant extract Hostname from URI'
+            });
         }
     });
 
