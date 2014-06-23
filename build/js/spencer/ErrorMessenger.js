@@ -5,22 +5,23 @@
 
 define(function(require) {
     var utils = require('js/spencer/Utils.js'),
-        selectors = require('js/data/selectors.js'),        
-        storage = $.localStorage,        
-        TOKEN;        
+        selectors = require('js/data/selectors.js'),
+        storage = $.localStorage,
+        scriptAvailable = false,
+        TOKEN;
 
-    $(document).on("checkErrors", function(event, frameID) {        
+    $(document).on("checkErrors", function(event, frameID) {
         var host = utils.hostFromUrl($(selectors.main.url).val()),
-            $frame = $('#' + frameID);            
-        
-        	TOKEN = utils.genToken();
-        
+            $frame = $('#' + frameID);
+
+        TOKEN = utils.genToken();
+
         if (host !== null) {
             var frameWidth = $frame.width(),
                 ifr = document.getElementById(frameID).contentWindow;
 
             $frame.parent('.frame').removeClass('frameerror');
-            
+
             ifr.postMessage(JSON.stringify({
                 source: 'SPENCER',
                 viewPort: frameWidth,
@@ -31,7 +32,7 @@ define(function(require) {
 
             setTimeout(function() {
                 if (scriptAvailable) {
-                    scriptAvailable = false;                    
+                    scriptAvailable = false;
                 } else {
                     $.growl.warning({
                         title: 'Cant find spencer.js on Testsite',
@@ -39,7 +40,7 @@ define(function(require) {
                     });
                 }
             }, storage.get('settings.scriptCheck'));
-            
+
         } else {
             $.growl.warning({
                 title: 'Host Error',
@@ -59,7 +60,7 @@ define(function(require) {
             }), host);
         }
     });
-           
+
     function receiveErrors(e) {
         var message = JSON.parse(e.data),
             $frame = $('#' + message.frameID).parent('.frame');
@@ -84,8 +85,7 @@ define(function(require) {
                     message: 'Good Job :)'
                 });
             }
-        }        
+        }
     }
-
     window.addEventListener('message', receiveErrors);
 });
