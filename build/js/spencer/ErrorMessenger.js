@@ -1,7 +1,6 @@
 /*jslint plusplus: true, vars: true, nomen: true, browser: true */
 /*global $, define */
 
-// TODO Make Tokenizer system
 // TODO Rename Frames for Error Reporting
 
 define(function(require) {

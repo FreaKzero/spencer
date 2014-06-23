@@ -44,13 +44,13 @@ spencerUtils.prototype.makeDebugInfo = function(element, viewPort, scrollWidth, 
         }
     }
 
+    dbgInfo = "<b>" + dbgInfo + "</b>" + "<br>Renderwidth: " + computedWidth + 'px';
+    
     if (computedWidth > viewPort) {
-        scrollWidth = '<br>Stylewidth: ' + scrollWidth + 'px';
+        dbgInfo += '<br>Stylewidth: ' + scrollWidth + 'px';
     }
-//GLITCH
-    dbgInfo = "<b>" + dbgInfo + "</b>" + "<br>Renderwidth: " + computedWidth + 'px' + scrollWidth;
+    
     info.innerHTML = dbgInfo;
-
     element.insertBefore(info, element.firstChild);
 };
 
