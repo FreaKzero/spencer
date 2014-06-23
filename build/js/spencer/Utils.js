@@ -2,6 +2,15 @@
 /*global define */
 
 define(function (require, exports) {
+    
+    function _rand() {
+		return Math.random().toString(36).substr(2);
+	};
+    
+    function genToken() {
+    	return _rand() + _rand();
+	};
+    
     function validateUrl(s) {
         var regexp = /(http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/;
         return regexp.test(s);
@@ -14,5 +23,6 @@ define(function (require, exports) {
 
     exports.validateUrl = validateUrl;
     exports.hostFromUrl = hostFromUrl;
+    exports.genToken = genToken;
 
 });

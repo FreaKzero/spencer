@@ -2,43 +2,45 @@
 /*global $, define */
 
 // TODO Make Tokenizer system
-// TODO fucking use Selectors.js
-// TODO "Hai Script, are you there ?"
-
+// TODO Rename Frames for Error Reporting
 
 define(function(require) {
     var utils = require('js/spencer/Utils.js'),
         selectors = require('js/data/selectors.js'),        
-        scriptAvailable = false,
-        storage = $.localStorage;        
+        storage = $.localStorage,        
+        TOKEN;        
 
-    $(document).on("checkErrors", function(event, frameID) {
+    $(document).on("checkErrors", function(event, frameID) {        
         var host = utils.hostFromUrl($(selectors.main.url).val()),
-            $frame = $('#' + frameID);
-
+            $frame = $('#' + frameID);            
+        
+        	TOKEN = utils.genToken();
+        
         if (host !== null) {
             var frameWidth = $frame.width(),
                 ifr = document.getElementById(frameID).contentWindow;
 
             $frame.parent('.frame').removeClass('frameerror');
-
-            var data = JSON.stringify({
+            
+            ifr.postMessage(JSON.stringify({
                 source: 'SPENCER',
                 viewPort: frameWidth,
                 frameID: frameID,
-                action: 'initCheck'
-            });
-
-            ifr.postMessage(data, host);
+                action: 'initCheck',
+                token: TOKEN
+            }), host);
 
             setTimeout(function() {
-                if (scriptAvailable === false) {
+                if (scriptAvailable) {
+                    scriptAvailable = false;                    
+                } else {
                     $.growl.warning({
                         title: 'Cant find spencer.js on Testsite',
                         message: 'Debugging/Error Reporting not available'
                     });
                 }
             }, storage.get('settings.scriptCheck'));
+            
         } else {
             $.growl.warning({
                 title: 'Host Error',
@@ -58,23 +60,32 @@ define(function(require) {
             }), host);
         }
     });
-
+           
     function receiveErrors(e) {
         var message = JSON.parse(e.data),
             $frame = $('#' + message.frameID).parent('.frame');
 
-        scriptAvailable = true;
+        if (message.token === TOKEN) {
+            scriptAvailable = true;
 
-        $('#url').val(message.currentLocation);
+            $('#url').val(message.currentLocation);
 
-        if (message.errorCount > 0) {
-            $frame.addClass('frameerror');
+            if (message.errorCount > 0) {
+                $frame.addClass('frameerror');
 
-            $.growl.error({
-                title: 'Found CSS Bounding Errors',
-                message: message.errorCount + ' Errors Found on ' + message.frameID
-            });
-        }
+                $.growl.error({
+                    title: 'Found Viewport Errors',
+                    message: message.errorCount + ' Errors Found on ' + message.frameID
+                });
+            } else {
+                $frame.removeClass('frameerror');
+
+                $.growl.success({
+                    title: 'No Viewport Errors',
+                    message: 'Good Job :)'
+                });
+            }
+        }        
     }
 
     window.addEventListener('message', receiveErrors);

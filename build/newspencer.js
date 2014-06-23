@@ -85,7 +85,7 @@ function receiveMessage(event) {
 
     if (message.source === 'SPENCER') {
         var spencer = new spencerUtils();
-
+        
         switch (message.action) {
 
             case 'reCheck':
@@ -99,7 +99,8 @@ function receiveMessage(event) {
                     source: "SPENCER",
                     currentLocation: window.location.href,
                     frameID: message.frameID,
-                    errorCount: errors
+                    errorCount: errors,
+                    token: message.token
                 }), event.origin);
             
             break;
