@@ -17,9 +17,17 @@ define(function (require) {
     $.each(devices, function (key, obj) {
         $(selectors.main.dropdown).append(buildOption(key, obj.width, obj.height, obj.icon, obj.shortcut));
         
-        $(document).bind('keyup', obj.shortcut, function(e){
+        var alt = 'ALT+'+obj.shortcut;
+        var ctrl = 'CTRL+'+obj.shortcut;
+        
+        $(document).bind('keyup', ctrl, function(e){
             $(document).trigger('spawnFrame', [obj.width, obj.height]);
         });
+        
+        $(document).bind('keyup', alt, function(e){
+            $(document).trigger('spawnFrame', [obj.height, obj.width]);
+        });
+        
         
     });
 

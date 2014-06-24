@@ -15,7 +15,8 @@ define(function(require) {
         settings = {
             home: 'http://localhost',
             growl: 3200,
-            scriptCheck: 3200
+            scriptCheck: 3200,
+            notifySuccess : true
         };
     }
     
@@ -23,28 +24,34 @@ define(function(require) {
     $.UIkit.tooltip.defaults.delay = 600;
     $.UIkit.tooltip.defaults.animation = true;
     $('#spencerjsLink').val('<script type="text/javascript" src="' + ScriptSrc + '"></script>');
-    
+                
     // Configurable Settings
     $(selectors.main.url).val(settings.home);
-    $(selectors.settings.home).val(settings.home);
+    $(selectors.settings.home).val(settings.home);    
     $(selectors.settings.growl).val(settings.growl);    
-    $(selectors.settings.scriptcheck).val(settings.scriptCheck);    
-    $.growl.setDuration(settings.growl);    
+    $(selectors.settings.scriptcheck).val(settings.scriptCheck);
+    $(selectors.settings.notifysuccess).prop('checked', settings.notifySuccess);
+    $.growl.setDuration(settings.growl);            
 
     // Events for Modal
     $(selectors.settings.actualurl).on('click', function() {
         $(selectors.settings.home).val($(selectors.main.url).val());
     });
 
-    $(selectors.settings.save).on('click', function() {
-
+    $(selectors.settings.save).on('click', function() {                
         storage.set('settings.home', $(selectors.settings.home).val());
         storage.set('settings.growl', $(selectors.settings.growl).val());        
-        storage.set('settings.scriptCheck', $(selectors.settings.scriptcheck).val());        
+        storage.set('settings.scriptCheck', $(selectors.settings.scriptcheck).val());  
+        storage.set('settings.notifySuccess', $(selectors.settings.notifysuccess).prop('checked'));                
         $.growl.setDuration(settings.growl);
         
         $.growl.success({
-            message: 'Settings saved'
-        });        
+            title: 'Settings saved',
+            message: 'Reloading Spencer ...'
+        });
+        
+        setTimeout(function() {
+        	window.location.reload()                        
+        }, 1500);                        
     });
 });

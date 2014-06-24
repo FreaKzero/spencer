@@ -78,11 +78,13 @@ define(function(require) {
                 });
             } else {
                 $frame.removeClass('frameerror');
-
-                $.growl.success({
-                    title: 'No Viewport Errors',
-                    message: 'Good Job :)'
-                });
+				
+                if (storage.get('settings.notifySuccess')) {
+                    $.growl.success({
+                        title: 'No Viewport Errors',
+                        message: 'Good Job :)'
+                    });
+                }
             }
         }        
     }

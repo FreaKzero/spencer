@@ -7,20 +7,20 @@ define(function () {
             "height": 480,
             "width": 320,
             "icon": "uk-icon-mobile",
-            "shortcut" : "ctrl+shift+1"
+            "shortcut" : "shift+1"
         },
         "iPhone 4": {
             "height": 960,
             "width": 640,
             "icon": "uk-icon-mobile",
-            "shortcut" : "ctrl+shift+2"
+            "shortcut" : "shift+2"
         },
 
         "iPhone 5": {
             "height": 1136,
             "width": 640,
             "icon": "uk-icon-mobile",
-            "shortcut" : "ctrl+shift+3"
+            "shortcut" : "shift+3"
         },
 
 
@@ -28,7 +28,7 @@ define(function () {
             "height": 990,
             "width": 768,
             "icon": "uk-icon-tablet",
-            "shortcut" : "ctrl+shift+4"
+            "shortcut" : "shift+4"
         }
     };
 

@@ -27,7 +27,8 @@ define(function () {
             'save' : '#settings-save',
             'cancel' : '#settings-cancel',
             'growl' :  '#settings-growl',
-            'scriptcheck' :  '#settings-scriptcheck'
+            'scriptcheck' :  '#settings-scriptcheck',
+            'notifysuccess' : '#settings-notify-on-success'
         }
     };
 
