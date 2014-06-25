@@ -2,11 +2,12 @@
 /*global $, define */
 
 // TODO Rename Frames for Error Reporting
+// TODO scriptAvailable false Glitch with multiple frames
 
 define(function(require) {
-    var utils = require('js/spencer/Utils.js'),
-        selectors = require('js/data/selectors.js'),
-        storage = $.localStorage,
+    var utils = require('js/lib/Utils.js'),
+        selectors = require('js/config/selectors.js'),
+        Settings = require('js/lib/SettingsManager.js'),
         scriptAvailable = false,
         TOKEN;
 
@@ -39,7 +40,7 @@ define(function(require) {
                         message: 'Debugging/Error Reporting not available'
                     });
                 }
-            }, storage.get('settings.scriptCheck'));
+            }, Settings.get('scriptcheck'));
 
         } else {
             $.growl.warning({
@@ -80,7 +81,7 @@ define(function(require) {
             } else {
                 $frame.removeClass('frameerror');
 				
-                if (storage.get('settings.notifySuccess')) {
+                if (Settings.get('notifysuccess')) {
                     $.growl.success({
                         title: 'No Viewport Errors',
                         message: 'Good Job :)'

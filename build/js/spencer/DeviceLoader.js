@@ -8,31 +8,25 @@
     uk-icon-desktop
 */
 
-
 define(function (require) {
 
-    var devices = require('js/data/devices.js'),
-        selectors = require('js/data/selectors.js');
+    var devices = require('js/config/devices.js'),
+        selectors = require('js/config/selectors.js');
 
     $.each(devices, function (key, obj) {
         $(selectors.main.dropdown).append(buildOption(key, obj.width, obj.height, obj.icon, obj.shortcut));
-        
-        var alt = 'ALT+'+obj.shortcut;
-        var ctrl = 'CTRL+'+obj.shortcut;
-        
-        $(document).bind('keyup', ctrl, function(e){
+                
+        $(document).bind('keyup','CTRL+'+obj.shortcut, function(e){
             $(document).trigger('spawnFrame', [obj.width, obj.height]);
         });
         
-        $(document).bind('keyup', alt, function(e){
+        $(document).bind('keyup','ALT+'+obj.shortcut, function(e){
             $(document).trigger('spawnFrame', [obj.height, obj.width]);
         });
-        
-        
     });
 
 
     function buildOption(name, width, height, icon, shortcut) {
-        return '<li><a href="#" data-spencer-w="' + width + '" data-spencer-h="' + height + '"><i class="' + icon + '"></i> ' + name + '<br /><span class="meta">'+shortcut.toUpperCase()+'</span></a></li>';
+        return '<li><a href="#" data-spencer-w="' + width + '" data-spencer-h="' + height + '"><i class="' + icon + '"></i> ' + name + '<br /><span class="meta">[CTRL/ALT]+'+shortcut.toUpperCase()+'</span></a></li>';
     }
 });

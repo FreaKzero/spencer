@@ -20,9 +20,15 @@ define(function (require, exports) {
         var matches = url.match(/^(https?\:\/\/([^\/?#]+)(?:[\/?#]|$))/i);
         return matches && matches[1];
     }
-
+	
+    function getScriptUrl() {
+		var ScriptUrl = window.location + "";        	
+        return ScriptUrl.substring(0, ScriptUrl.lastIndexOf('/')) + "/spencer.js";        
+    };
+        
     exports.validateUrl = validateUrl;
+    exports.getScriptUrl = getScriptUrl;
     exports.hostFromUrl = hostFromUrl;
-    exports.genToken = genToken;
+    exports.genToken = genToken;    
 
 });

@@ -2,8 +2,8 @@
 /*global $, define */
 
 define(function(require) {
-    var utils = require('js/spencer/Utils.js'),
-        selectors = require('js/data/selectors.js'),
+    var utils = require('js/lib/Utils.js'),
+        selectors = require('js/config/selectors.js'),
         qrcode = require('js/vendor/qrcode.js');
 
     qrcode.init(document.getElementById('qrcode'), $(selectors.main.url).val());

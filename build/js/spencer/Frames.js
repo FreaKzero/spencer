@@ -2,8 +2,8 @@
 /*global $, define */
 
 define(function(require) {
-    var selectors = require('js/data/selectors.js'),
-        utils = require('js/spencer/Utils.js'),
+    var selectors = require('js/config/selectors.js'),
+        utils = require('js/lib/Utils.js'),
         devicelink = selectors.main.dropdown + " a";
 
     $(document).on('click', selectors.frames.refresh, function() {

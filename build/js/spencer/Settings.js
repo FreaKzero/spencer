@@ -2,56 +2,47 @@
 /*global $, define */
 
 define(function(require) {
-    var storage = $.localStorage,
-        selectors = require('js/data/selectors.js'),
-        ScriptUrl = window.location + "",
-        ScriptSrc = ScriptUrl.substring(0, ScriptUrl.lastIndexOf('/')) + "/spencer.js",
-        settings;
-
-    if (storage.get('settings')) {
-        settings = storage.get('settings');        
-    } else {
-        // Default Settings
-        settings = {
-            home: 'http://localhost',
-            growl: 3200,
-            scriptCheck: 3200,
-            notifySuccess : true
-        };
-    }
+    var utils = require('js/lib/Utils.js'),
+        selectors = require('js/config/selectors.js'),
+        Settings = require('js/lib/SettingsManager.js');
+    
+    Settings.onStore(function() {
+		$.growl.setDuration(Settings.get('growl'));
+        $(selectors.main.url).val(Settings.get('home'));        
+    });
     
     // Non configurable Settings
     $.UIkit.tooltip.defaults.delay = 600;
     $.UIkit.tooltip.defaults.animation = true;
-    $('#spencerjsLink').val('<script type="text/javascript" src="' + ScriptSrc + '"></script>');
-                
-    // Configurable Settings
-    $(selectors.main.url).val(settings.home);
-    $(selectors.settings.home).val(settings.home);    
-    $(selectors.settings.growl).val(settings.growl);    
-    $(selectors.settings.scriptcheck).val(settings.scriptCheck);
-    $(selectors.settings.notifysuccess).prop('checked', settings.notifySuccess);
-    $.growl.setDuration(settings.growl);            
+    
+    // selectors FTW
+    $(selectors.main.spencerjs).val('<script type="text/javascript" src="' + utils.getScriptUrl() + '"></script>');
+
+    $(selectors.main.url).val(Settings.get('home'));
+    
+    Settings.hydrateInputs();
+    $.growl.setDuration(Settings.get('growl'));
 
     // Events for Modal
-    $(selectors.settings.actualurl).on('click', function() {
-        $(selectors.settings.home).val($(selectors.main.url).val());
+    $(selectors.settings.actualurl).on('click', function() {        
+        $(selectors.settings.home).val($(selectors.main.url).val());        
     });
 
-    $(selectors.settings.save).on('click', function() {                
-        storage.set('settings.home', $(selectors.settings.home).val());
-        storage.set('settings.growl', $(selectors.settings.growl).val());        
-        storage.set('settings.scriptCheck', $(selectors.settings.scriptcheck).val());  
-        storage.set('settings.notifySuccess', $(selectors.settings.notifysuccess).prop('checked'));                
-        $.growl.setDuration(settings.growl);
+    $(selectors.settings.resetdefault).on('click', function() {        
+		Settings.reset();
+        Settings.hydrateInputs();
         
         $.growl.success({
-            title: 'Settings saved',
-            message: 'Reloading Spencer ...'
+            message: 'Default Settings recovered'
         });
         
-        setTimeout(function() {
-        	window.location.reload()                        
-        }, 1500);                        
+    });
+    
+    $(selectors.settings.save).on('click', function() {                
+        Settings.saveValues();        
+        
+        $.growl.success({            
+            message: 'Settings saved'
+        });
     });
 });

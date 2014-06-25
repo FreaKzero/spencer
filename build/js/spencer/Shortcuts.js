@@ -2,7 +2,7 @@
 /*global $, define */
 
 define(function(require) {
-    var selectors = require('js/data/selectors.js');
+    var selectors = require('js/config/selectors.js');
 
     $(document).bind('keyup', 'ctrl+shift+r', function() {
         $(document).trigger('globalOpen');
