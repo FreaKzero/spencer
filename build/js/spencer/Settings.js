@@ -6,9 +6,25 @@ define(function(require) {
         selectors = require('js/config/selectors.js'),
         Settings = require('js/lib/SettingsManager.js');
     
+    function getSeconds(x) {
+        return Math.round((x/1000) * 100) / 100;
+    }
+
     Settings.onStore(function() {
 		$.growl.setDuration(Settings.get('growl'));
-        $(selectors.main.url).val(Settings.get('home'));        
+        $(selectors.main.url).val(Settings.get('home'));
+        $(selectors.settings.growlValue).text(getSeconds(Settings.get('growl')));
+        $(selectors.settings.scriptcheckValue).text(getSeconds(Settings.get('scriptcheck')));
+    });
+
+    $(selectors.settings.growl).on('change', function() {
+        var sec = getSeconds($(this).val());
+        $(selectors.settings.growlValue).text(sec);
+    });
+
+    $(selectors.settings.scriptcheck).on('change', function() {
+        var sec = getSeconds($(this).val());
+        $(selectors.settings.scriptcheckValue).text(sec);
     });
     
     // Non configurable Settings
@@ -22,6 +38,9 @@ define(function(require) {
     
     Settings.hydrateInputs();
     $.growl.setDuration(Settings.get('growl'));
+
+    $(selectors.settings.growlValue).text(getSeconds(Settings.get('growl')));
+    $(selectors.settings.scriptcheckValue).text(getSeconds(Settings.get('scriptcheck')));
 
     // Events for Modal
     $(selectors.settings.actualurl).on('click', function() {        

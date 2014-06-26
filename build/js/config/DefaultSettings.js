@@ -5,8 +5,8 @@ define(function(require) {
     var utils = require('js/lib/Utils.js'),
         settings = {
             home: utils.hostFromUrl(window.location + ""),
-            growl: 3200,
-            scriptcheck: 1000,
+            growl: 2500,
+            scriptcheck: 2500,
             notifysuccess: true
         };
 

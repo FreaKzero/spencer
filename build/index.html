@@ -182,7 +182,8 @@
                         <div class="uk-grid uk-grid-small">
                             <div class="uk-width-1-2">
                                 <label class="uk-form-label" for="settings-growl">Notification Time</label>
-                                <input class="uk-form" type="text" id="settings-growl" value="3200" />
+                                <input type="range" id="settings-growl" min="1000" step="100" max="5000"> <br/>
+                                <span id="settings-growl-value">0</span> Seconds
                             </div>
                             <div class="uk-width-1-2">
                                 <label class="uk-form-label" for="settings-notify-on-success">
@@ -195,7 +196,9 @@
                         </div>                        
                         <br />                                                
                         <label class="uk-form-label" for="settings-scriptcheck">Script Check Timeout</label>
-                        <input class="uk-form" type="text" id="settings-scriptcheck" value="5000" />
+                            <input type="range" id="settings-scriptcheck" min="1000" step="100" max="5000"> <br/>
+                            <span id="settings-scriptcheck-value">0</span> Seconds
+
                         <br />
                         <br />                                                                        
                         <div class="uk-clearfix">

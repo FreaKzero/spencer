@@ -32,7 +32,9 @@ define(function () {
             'cancel' 	 	: '#settings-cancel',
             'growl' 	 	: '#settings-growl',
             'scriptcheck' 	:  '#settings-scriptcheck',
-            'notifysuccess' : '#settings-notify-on-success'
+            'notifysuccess' : '#settings-notify-on-success',
+            'growlValue'   : '#settings-growl-value',
+            'scriptcheckValue' : '#settings-scriptcheck-value'
         }
     };   
 });
