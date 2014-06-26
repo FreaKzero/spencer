@@ -1,8 +1,6 @@
 /*jslint plusplus: true, vars: true, nomen: true, browser: true */
 /*global requirejs, require, define */
 
-
-
 // TODO http://stackoverflow.com/questions/11458403/firefox-like-inspecting-element
 requirejs.config({
     paths: {
@@ -18,7 +16,8 @@ requirejs.config({
         'spencerDevices': 'spencer/DeviceLoader',
         'spencerErrors': 'spencer/ErrorMessenger',
         'spencerShortcuts': 'spencer/Shortcuts',
-        'spencerSettings': 'spencer/Settings'        
+        'spencerSettings': 'spencer/Settings',
+        'easterEgg': 'spencer/EasterEgg'
 
     },
     "shim": {
@@ -33,20 +32,20 @@ requirejs.config({
 define(['jquery', 'jquery.hotkeys', 'jquery.uikit', 'jquery.spencerframe', 'jquery.storage', 'jquery.growl'], function($) {
     require(['spencerDevices', 'spencerFrames', 'spencerErrors', 'spencerMain', 'spencerShortcuts', 'spencerSettings'],
         function(spencerDevices, spencerFrames, spencerErrors, spencerMain) {
-            
+
             // I dont bother about IE users - not even for IE11 (no CSS Gradients in 2013 - rly ?)
-            if (navigator.userAgent.match(/msie/i) || navigator.userAgent.match(/trident/i) ){
-				$('#antiIE').slideDown();
-				$('#antiIE > .close-antiie').on('click', function() {
-					var $self = $(this).parent();
-						$self.slideUp(function() {
-							$self.remove(); 
-                        });
+            if (navigator.userAgent.match(/msie/i) || navigator.userAgent.match(/trident/i)) {
+                $('#antiIE').slideDown();
+                $('#antiIE > .close-antiie').on('click', function() {
+                    var $self = $(this).parent();
+                    $self.slideUp(function() {
+                        $self.remove();
+                    });
                 });
-			} else {
-				$('#antiIE').remove();
-			}
-            
+            } else {
+                $('#antiIE').remove();
+            }
+
             // Kill the Preloader
             setTimeout(function() {
 

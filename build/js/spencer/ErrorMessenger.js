@@ -3,19 +3,19 @@
 
 // TODO Rename Frames for Error Reporting
 // TODO scriptAvailable false Glitch with multiple frames
+// TODO actual a Tokenerror
 
 define(function(require) {
     var utils = require('js/lib/Utils.js'),
         selectors = require('js/config/selectors.js'),
         Settings = require('js/lib/SettingsManager.js'),
-        scriptAvailable = false,
-        TOKEN;
+        scriptAvailable = false;
 
     $(document).on("checkErrors", function(event, frameID) {
         var host = utils.hostFromUrl($(selectors.main.url).val()),
             $frame = $('#' + frameID);
 
-        TOKEN = utils.genToken();
+        scriptAvailable = false;
 
         if (host !== null) {
             var frameWidth = $frame.width(),
@@ -27,14 +27,11 @@ define(function(require) {
                 source: 'SPENCER',
                 viewPort: frameWidth,
                 frameID: frameID,
-                action: 'initCheck',
-                token: TOKEN
+                action: 'initCheck'
             }), host);
 
             setTimeout(function() {
-                if (scriptAvailable) {
-                    scriptAvailable = false;
-                } else {
+                if (!scriptAvailable) {
                     $.growl.warning({
                         title: 'Cant find spencer.js on Testsite',
                         message: 'Debugging/Error Reporting not available'
@@ -66,27 +63,25 @@ define(function(require) {
         var message = JSON.parse(e.data),
             $frame = $('#' + message.frameID).parent('.frame');
 
-        if (message.token === TOKEN) {
-            scriptAvailable = true;
+        scriptAvailable = true;
 
-            $('#url').val(message.currentLocation);
+        $('#url').val(message.currentLocation);
 
-            if (message.errorCount > 0) {
-                $frame.addClass('frameerror');
+        if (message.errorCount > 0) {
+            $frame.addClass('frameerror');
 
-                $.growl.error({
-                    title: 'Found Viewport Errors',
-                    message: message.errorCount + ' Errors Found on ' + message.frameID
+            $.growl.error({
+                title: 'Found Viewport Errors',
+                message: message.errorCount + ' Errors Found on ' + message.frameID
+            });
+        } else {
+            $frame.removeClass('frameerror');
+
+            if (Settings.get('notifysuccess')) {
+                $.growl.success({
+                    title: 'No Viewport Errors',
+                    message: 'Good Job :)'
                 });
-            } else {
-                $frame.removeClass('frameerror');
-				
-                if (Settings.get('notifysuccess')) {
-                    $.growl.success({
-                        title: 'No Viewport Errors',
-                        message: 'Good Job :)'
-                    });
-                }
             }
         }
     }

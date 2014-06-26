@@ -45,11 +45,11 @@ spencerUtils.prototype.makeDebugInfo = function(element, viewPort, scrollWidth, 
     }
 
     dbgInfo = "<b>" + dbgInfo + "</b>" + "<br>Renderwidth: " + computedWidth + 'px';
-    
+
     if (computedWidth > viewPort) {
         dbgInfo += '<br>Stylewidth: ' + scrollWidth + 'px';
     }
-    
+
     info.innerHTML = dbgInfo;
     element.insertBefore(info, element.firstChild);
 };
@@ -60,7 +60,7 @@ spencerUtils.prototype.checkErrors = function(viewPort) {
         errorCount = 0;
 
     this.injectCSS();
-    
+
     // Not the most elegant solution - but the fastest
     while (elements[i]) {
         var scrollWidth = elements[i].scrollWidth,
@@ -85,12 +85,12 @@ function receiveMessage(event) {
 
     if (message.source === 'SPENCER') {
         var spencer = new spencerUtils();
-        
+
         switch (message.action) {
 
             case 'reCheck':
-                document.location.reload(true);                
-            break;
+                document.location.reload(true);
+                break;
 
             default:
                 var errors = spencer.checkErrors(message.viewPort);
@@ -99,11 +99,10 @@ function receiveMessage(event) {
                     source: "SPENCER",
                     currentLocation: window.location.href,
                     frameID: message.frameID,
-                    errorCount: errors,
-                    token: message.token
+                    errorCount: errors
                 }), event.origin);
-            
-            break;
+
+                break;
         }
     }
 }
