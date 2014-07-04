@@ -46,6 +46,18 @@
             font-weight:bold;
         }
 
+        #settings-growl-value {
+            display:block;
+            float: left;
+            width: 25px;   
+        }
+
+        #settings-scriptcheck-value {
+            display:block;
+            float: left;
+            width: 25px;   
+        }
+
         
     </style>
 </head>
@@ -183,7 +195,9 @@
                             <div class="uk-width-1-2">
                                 <label class="uk-form-label" for="settings-growl">Notification Time</label>
                                 <input type="range" id="settings-growl" min="1000" step="100" max="5000"> <br/>
-                                <span id="settings-growl-value">0</span> Seconds
+                                <div class="uikit-clearfix">
+                                    <span id="settings-growl-value">0</span> Seconds
+                                </div>
                             </div>
                             <div class="uk-width-1-2">
                                 <label class="uk-form-label" for="settings-notify-on-success">
@@ -197,7 +211,9 @@
                         <br />                                                
                         <label class="uk-form-label" for="settings-scriptcheck">Script Check Timeout</label>
                             <input type="range" id="settings-scriptcheck" min="1000" step="100" max="5000"> <br/>
-                            <span id="settings-scriptcheck-value">0</span> Seconds
+                            <div class="uikit-clearfix">
+                                <span id="settings-scriptcheck-value">0</span> Seconds
+                            </div>
 
                         <br />
                         <br />                                                                        
