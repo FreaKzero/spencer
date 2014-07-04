@@ -32,9 +32,22 @@
     background-image: -webkit-linear-gradient(top, darken(@global-primary-gradient-top,10%), darken(@global-primary-gradient-bottom,10%));
     background-image: linear-gradient(to bottom, darken(@global-primary-gradient-top,10%), darken(@global-primary-gradient-bottom,10%)); 
     color: @global-color;
-    
-}
 
+    -webkit-transition: all 0.4s ease-in-out;
+    -moz-transition: all 0.4s ease-in-out;
+    transition: all 0.4s ease-in-out;
+
+    &.uk-alert-incoming {
+        opacity: 0;
+        right: -3000;
+        margin-bottom: -30px;
+    }
+
+    &.uk-alert-outgoing {            
+        opacity: 0;
+        margin-bottom: 40px;
+    }    
+}
 
 // Modifier: `uk-alert-success`
 // ========================================================================
@@ -73,3 +86,17 @@
 // ========================================================================
 
 .hook-alert-misc() {}
+
+// New Elements
+
+#growls {
+    z-index: 99999;
+    position: fixed;
+    width: 400px;
+    bottom: 10px;
+    right: 10px;
+}
+
+.uk-alert-title {
+    font-weight:bold;
+}
