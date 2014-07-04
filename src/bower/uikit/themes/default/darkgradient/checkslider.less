@@ -1,0 +1,118 @@
+.uk-checkslider {    
+    position: relative;
+    display: inline-block;
+    vertical-align: top;
+    width: 50px;
+    height: 20px;
+    padding: 2px;    
+    border-radius: 3px;
+    box-shadow: inset 0 -1px @dark-gradient-top, inset 0 1px 1px rgba(0, 0, 0, 0.05);
+    cursor: pointer;
+    background-image: -webkit-linear-gradient(top, darken(@dark-gradient-bottom,20%), darken(@dark-gradient-top,10%) 25px);
+    background-image: -moz-linear-gradient(top, darken(@dark-gradient-bottom,20%), darken(@dark-gradient-top,10%) 25px);
+    background-image: -o-linear-gradient(top, darken(@dark-gradient-bottom,20%), darken(@dark-gradient-top,10%) 25px);
+    background-image: linear-gradient(to bottom, darken(@dark-gradient-bottom,20%), darken(@dark-gradient-top,10%) 25px);
+} 
+
+.uk-checkslider > input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+}
+
+.uk-checkslider .label {
+    position: relative;
+    display: block;
+    height: inherit;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 10px;
+    text-transform: uppercase;
+    background: @form-background; 
+    border-radius: inherit;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.12), inset 0 0 2px rgba(0, 0, 0, 0.15);
+    -webkit-transition: 0.15s ease-out;
+    -moz-transition: 0.15s ease-out;
+    -o-transition: 0.15s ease-out;
+    transition: 0.15s ease-out;
+    -webkit-transition-property: opacity background;
+    -moz-transition-property: opacity background;
+    -o-transition-property: opacity background;
+    transition-property: opacity background;
+}
+.uk-checkslider .label:before, .uk-checkslider .label:after {
+    position: absolute;
+    top: 50%;
+    margin-top: -.5em;
+    line-height: 1;
+    -webkit-transition: inherit;
+    -moz-transition: inherit;
+    -o-transition: inherit;
+    transition: inherit;
+}
+.uk-checkslider .label:before {
+    content: "Off";
+    right: 5px;
+    color: #aaa;    
+    text-shadow: 0 1px rgba(255, 255, 255, 0.5);
+}
+
+.uk-checkslider .label:after {
+    content: "On";
+    left: 7px; 
+    color: white;
+    text-shadow: 0 1px rgba(0, 0, 0, 0.2);
+    opacity: 0;
+}
+
+.uk-checkslider > input:checked ~ .label {
+    background: @global-success-gradient-bottom;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.15), inset 0 0 3px rgba(0, 0, 0, 0.2);
+}
+
+.uk-checkslider > input:checked ~ .label:before {
+    opacity: 0;          
+}
+
+.uk-checkslider > input:checked ~ .label:after {
+    opacity: 1;          
+}
+
+.uk-checkslider .handle {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 20px;
+    height: 20px;
+    background: @global-success-gradient-top;
+    border-radius: 3px;          
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
+    background-image: -webkit-linear-gradient(top, @global-success-gradient-top 40%, @global-success-gradient-bottom);
+    background-image: -moz-linear-gradient(top, @global-success-gradient-top 40%, @global-success-gradient-bottom);
+    background-image: -o-linear-gradient(top, @global-success-gradient-top 40%, @global-success-gradient-bottom);
+    background-image: linear-gradient(to bottom, @global-success-gradient-top 40%, @global-success-gradient-bottom);
+    -webkit-transition: left 0.15s ease-out;
+    -moz-transition: left 0.15s ease-out;
+    -o-transition: left 0.15s ease-out;
+    transition: left 0.15s ease-out;
+}
+.uk-checkslider .handle:before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: -6px 0 0 -6px;
+    width: 12px;
+    height: 12px;
+    background: @global-success-gradient-top;
+    border-radius: 6px;
+    box-shadow: inset 0 1px rgba(0, 0, 0, 0.02);
+    background-image: -webkit-linear-gradient(top, @global-success-gradient-bottom, @global-success-gradient-top);
+    background-image: -moz-linear-gradient(top, @global-success-gradient-bottom, @global-success-gradient-top);
+    background-image: -o-linear-gradient(top, @global-success-gradient-bottom, @global-success-gradient-top);
+    background-image: linear-gradient(to bottom, @global-success-gradient-bottom, @global-success-gradient-top);
+}
+.uk-checkslider input:checked ~ .handle {
+    left: 32px; 
+    box-shadow: -1px 1px 5px rgba(0, 0, 0, 0.2);
+}
