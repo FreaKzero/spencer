@@ -1,191 +1,182 @@
 <!DOCTYPE html>
 <html class="no-js">
-
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title></title>
-    <link rel="stylesheet" href="css/uikit.darkgradient.min.css">    
-</head>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <link rel="stylesheet" href="css/uikit.darkgradient.min.css">
+    </head>
     
-<body>
-    <div id="antiIE">Spencer is a diagnose Tool for modern Webtechnologies, and is built with modern Web Technologies - <a href="http://abetterbrowser.org/" target="_blank">Please use a proper Browser</a><a class="uk-close close-antiie" style="float:right;margin-right: 10px;"></a></div>    
-    <div id="loader">
-        <div id="loadermsg">
-            <div id="spinner"></div>
-            <p>Spencer is loading</p>
-        </div>
-    </div>    
-    <nav class="uk-navbar uk-navbar-attached">
-
-        <a class="uk-navbar-brand" href="#">Spencer</a>
-
-        <div class="uk-navbar-content">
-            <div class="uk-form uk-margin-remove uk-display-inline-block">
-
-                <div class="uk-form-icon">
-                    <i class="uk-icon-compass"></i>
-                    <input type="text" id="url" value="http://localhost" style="width: 450px">
-                </div>
-                <div class="uk-button-group">
-                    <button id="go" class="uk-button uk-button-primary" data-uk-tooltip="" title="CTRL+SHIFT+RETURN">
-                        <i class="uk-icon-crosshairs"></i>&nbsp;Devices</button>
-                    <button id="newWindow" class="uk-button uk-button-primary" data-uk-modal="{target:'#qrmodal'}">
-                        <i class="uk-icon-qrcode"></i>&nbsp;QR-Code</button>
-                </div>
+    <body>
+        <div id="antiIE">Spencer is a diagnose Tool for modern Webtechnologies, and is built with modern Web Technologies - <a href="http://abetterbrowser.org/" target="_blank">Please use a proper Browser</a><a class="uk-close close-antiie" style="float:right;margin-right: 10px;"></a></div>
+        <div id="loader">
+            <div id="loadermsg">
+                <div id="spinner"></div>
+                <p>Spencer is loading</p>
             </div>
         </div>
-        <div class="uk-navbar-content uk-navbar-flip">
-            <div class="uk-button-group">
-                <div class="uk-button-dropdown" data-uk-dropdown="{mode:'click'}">
-                    <button class="uk-button uk-button-success">
+        <nav class="uk-navbar uk-navbar-attached">
+            <a class="uk-navbar-brand" href="#">Spencer</a>
+            <div class="uk-navbar-content">
+                <div class="uk-form uk-margin-remove uk-display-inline-block">
+                    <div class="uk-form-icon">
+                        <i class="uk-icon-compass"></i>
+                        <input type="text" id="url" value="http://localhost" style="width: 450px">
+                    </div>
+                    <div class="uk-button-group">
+                        <button id="go" class="uk-button uk-button-primary" data-uk-tooltip="" title="CTRL+SHIFT+RETURN">
+                        <i class="uk-icon-crosshairs"></i>&nbsp;Devices</button>
+                        <button id="newWindow" class="uk-button uk-button-primary" data-uk-modal="{target:'#qrmodal'}">
+                        <i class="uk-icon-qrcode"></i>&nbsp;QR-Code</button>
+                    </div>
+                </div>
+            </div>
+            <div class="uk-navbar-content uk-navbar-flip">
+                <div class="uk-button-group">
+                    <div class="uk-button-dropdown" data-uk-dropdown="{mode:'click'}">
+                        <button class="uk-button uk-button-success">
                         <i class="uk-icon-mobile"></i>
                         Spawn Device
-                    </button>
-
-                    <div class="uk-dropdown uk-dropdown-center">
-                        <ul class="uk-nav uk-nav-dropdown" id="spawn">
-                        </ul>
-                    </div>
-                </div>
-                <button class="uk-button uk-button-success" data-uk-modal="{target:'#settingsModal'}">
-                    <i class="uk-icon-gear"></i>
-                </button>
-
-            </div>
-        </div>
-    </nav>
-    <div id="frames">
-    </div>
-
-    <div class="frame stencil" style="padding-bottom: 42px; background-color: #dcdcdc; float:left;">
-        <div class="uk-navbar uk-navbar-attached" style="padding: 5px 0 5px 10px">
-            <div class="uk-form uk-margin-remove uk-display-inline-block">
-                <input type="number" min="200" max="1200" step="10" style="width: 50px" class="frame-width uk-form-small" />&nbsp;x
-                <input type="number" min="200" max="1200" step="10" style="width: 50px" class="frame-height uk-form-small" />&nbsp;
-                <div class="uk-button-group" style="margin-right: 5px;">
-                    <button class="uk-button uk-button-small resizeFrame" data-uk-tooltip="" title="Resize Device">
-                        <i class="uk-icon-arrows-alt"></i>
-                    </button>
-                    <button class="uk-button uk-button-small rotateFrame" data-uk-tooltip="" title="Rotate Device">
-                        <i class="uk-icon-rotate-right"></i>
-                    </button>
-                </div>
-
-                <div class="uk-button-group">
-                    <button class="uk-button uk-button-small debugFrame" data-uk-tooltip="" title="Debug View" disabled="disabled">
-                        <i class="uk-icon-bug"></i>
-                    </button>
-
-                    <button class="uk-button uk-button-small refreshFrame" data-uk-tooltip="" title="Refresh Device">
-                        <i class="uk-icon-refresh uk-icon-spin"></i>
-                    </button>
-                </div>
-            </div>
-            <div class="uk-navbar-flip" style="margin: 2px 10px 0 0;">
-                <i class="uk-icon-times closeFrame icon" data-uk-tooltip="" title="Close Device"></i>
-            </div>
-        </div>
-        <iframe src="start.html" scrolling="yes" border="0"></iframe>
-    </div>
-
-    <div id="qrmodal" class="uk-modal">
-        <div class="uk-modal-dialog" style="width:300px">
-            <a class="uk-modal-close uk-close"></a>
-            <center>
-                <div id="qrcode"></div>
-            </center>
-        </div>
-    </div>
-
-    <div id="settingsModal" class="uk-modal">
-        <div class="uk-modal-dialog">
-            <a class="uk-modal-close uk-close"></a>
-
-            <div>
-                <ul class="uk-tab" data-uk-tab="{connect:'#tab-content'}">
-                    <li class="uk-active"><a href="#">Errorchecker</a>
-                    </li>
-                    <li><a href="#">Devices</a>
-                    </li>
-                    <li><a href="#">Settings</a>
-                    </li>
-                </ul>
-            </div>
-
-            <ul id="tab-content" class="uk-switcher uk-margin">
-                <li class="uk-active">
-                    <h2 class="uk-article-title">Errorchecker</h2>
-                    <p>To Enable Errortesting for Spencer Please insert this CodeSnipplet into the Site you want to Test.</p>
-                    <br />
-                    <div class="uk-form uk-margin-remove uk-display-inline-block">
-                        <textarea cols="60" rows="5" id="spencerjsLink">
-                        </textarea>
-                        <strong>Spencer Version: 0.1</strong> | Made with uikit, jQuery and &hearts; by FreaKzero
-                    </div>
-                </li>
-                <li>
-                    <h2 class="uk-article-title">TODO: Devices CRUD</h2> 
-                </li>
-                <li>
-                    <h2 class="uk-article-title">Settings</h2> 
-                    <div class="uk-form uk-form-stacked">
-                        <label class="uk-form-label" for="settings-home">Default URL:</label>
-                        <input class="uk-form-width-large" type="text" id="settings-home" />
-                        <button id="settings-actualurl" class="uk-button" title="Use actual URL">
-                        <i class="uk-icon-globe"></i></button>
-                        <br />
-                        <br />
-                        
-                        <div class="uk-grid uk-grid-small">
-                            <div class="uk-width-1-2">
-                                <label class="uk-form-label" for="settings-growl">Notification Time</label>
-                                <input type="range" id="settings-growl" min="1000" step="100" max="5000"> <br/>
-                                <div class="uikit-clearfix">
-                                    <span id="settings-growl-value">0</span> Seconds
-                                </div>
-                            </div>
-                            <div class="uk-width-1-2">
-                                <label class="uk-form-label"for="settings-notify-on-success">Notify on Success &nbsp; &nbsp; 
-                                    <label class="uk-checkslider">
-                                            <input type="checkbox" id="settings-notify-on-success">
-
-                                            <span class="label"></span>
-                                            <span class="handle"></span>
-                                    </label>
-                                    </label>
-                            </div>
-                        </div>                        
-                        <br />                                                
-                        <label class="uk-form-label" for="settings-scriptcheck">Script Check Timeout</label>
-                            <input type="range" id="settings-scriptcheck" min="1000" step="100" max="5000"> <br/>
-                            <div class="uikit-clearfix">
-                                <span id="settings-scriptcheck-value">0</span> Seconds
-                            </div>
-
-                        <br />
-                        <br />                                                                        
-                        <div class="uk-clearfix">
-                            
-                            <div class="uk-grid uk-grid-small">
-                                <div class="uk-width-1-2">
-                                    <button id="settings-save" class="uk-button">Save Settings</button>
-                                </div>
-                                <div class="uk-width-1-2">
-                                    
-                                    <div class="uk-align-right">
-                                        <button id="settings-reset-default" class="uk-button">Reset to Defaults</button>                                                           
-                                        <button id="settings-cancel" class="uk-button uk-modal-close">Close</button>
-                                    </div>                                    
-                                </div>
-                            </div>                            
+                        </button>
+                        <div class="uk-dropdown uk-dropdown-center">
+                            <ul class="uk-nav uk-nav-dropdown" id="spawn">
+                            </ul>
                         </div>
                     </div>
-                </li>
-            </ul>
+                    <button class="uk-button uk-button-success" data-uk-modal="{target:'#settingsModal'}">
+                    <i class="uk-icon-gear"></i>
+                    </button>
+                </div>
+            </div>
+        </nav>
+        <div id="frames">
         </div>
+        <div class="frame stencil" style="padding-bottom: 42px; background-color: #dcdcdc; float:left;">
+            <div class="uk-navbar uk-navbar-attached" style="padding: 5px 0 5px 10px">
+                <div class="uk-form uk-margin-remove uk-display-inline-block">
+                    <input type="number" min="200" max="1200" step="10" style="width: 50px" class="frame-width uk-form-small" />&nbsp;x
+                    <input type="number" min="200" max="1200" step="10" style="width: 50px" class="frame-height uk-form-small" />&nbsp;
+                    <div class="uk-button-group" style="margin-right: 5px;">
+                        <button class="uk-button uk-button-small resizeFrame" data-uk-tooltip="" title="Resize Device">
+                        <i class="uk-icon-arrows-alt"></i>
+                        </button>
+                        <button class="uk-button uk-button-small rotateFrame" data-uk-tooltip="" title="Rotate Device">
+                        <i class="uk-icon-rotate-right"></i>
+                        </button>
+                    </div>
+                    <div class="uk-button-group">
+                        <button class="uk-button uk-button-small debugFrame" data-uk-tooltip="" title="Debug View" disabled="disabled">
+                        <i class="uk-icon-bug"></i>
+                        </button>
+                        <button class="uk-button uk-button-small refreshFrame" data-uk-tooltip="" title="Refresh Device">
+                        <i class="uk-icon-refresh uk-icon-spin"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="uk-navbar-flip" style="margin: 2px 10px 0 0;">
+                    <i class="uk-icon-times closeFrame icon" data-uk-tooltip="" title="Close Device"></i>
+                </div>
+            </div>
+            <iframe src="start.html" scrolling="yes" border="0"></iframe>
+        </div>
+        <div id="qrmodal" class="uk-modal">
+            <div class="uk-modal-dialog" style="width:300px">
+                <a class="uk-modal-close uk-close"></a>
+                <center>
+                <div id="qrcode"></div>
+                </center>
+            </div>
+        </div>
+        <div id="settingsModal" class="uk-modal">
+            <div class="uk-modal-dialog">
+                <a class="uk-modal-close uk-close"></a>
+                <div>
+                    <ul class="uk-tab" data-uk-tab="{connect:'#tab-content'}">
+                        <li class="uk-active"><a href="#">Errorchecker</a>
+                    </li>
+                    <li><a href="#">Devices</a>
+                </li>
+                <li><a href="#">Settings</a>
+            </li>
+        </ul>
     </div>
-    <script src="js/vendor/require.js" data-main="js/app.js"></script>
+    <ul id="tab-content" class="uk-switcher uk-margin">
+        <li class="uk-active">
+            <h2 class="uk-article-title">Errorchecker</h2>
+            <p>To Enable Errortesting for Spencer Please insert this CodeSnipplet into the Site you want to Test.</p>
+            <br />
+            <div class="uk-form uk-margin-remove uk-display-inline-block">
+                <textarea cols="60" rows="5" id="spencerjsLink">
+                </textarea>
+                <strong>Spencer Version: 0.1</strong> | Made with uikit, jQuery and &hearts; by FreaKzero
+            </div>
+        </li>
+        <li>
+            <h2 class="uk-article-title">TODO: Devices CRUD</h2>
+        </li>
+        <li>
+            <h2 class="uk-article-title">Settings</h2>
+            <div class="uk-form uk-form-stacked">
+                <label class="uk-form-label" for="settings-home">Default URL:</label>
+                <input class="uk-form-width-large" type="text" id="settings-home" />
+                <button id="settings-actualurl" class="uk-button" title="Use actual URL">
+                <i class="uk-icon-globe"></i></button>
+                <br />
+                <br />
+                
+                <div class="uk-grid uk-grid-small">
+                    <div class="uk-width-1-2">
+                        <label class="uk-form-label" for="settings-growl">General Notification Time</label>
+                        <input type="range" id="settings-growl" min="1000" step="100" max="5000"> <br/>
+                        <div class="uikit-clearfix">
+                            <span id="settings-growl-value">1</span> Seconds
+                        </div>
+                    </div>
+                    <div class="uk-width-1-2">
+                        <label style="width: 95%;" class="uk-form-label uk-clearfix" for="settings-notify-on-success">Success Notify &nbsp; &nbsp;
+                            <label class="uk-checkslider uk-float-right">
+                                <input type="checkbox" id="settings-notify-on-success">
+                                <span class="label"></span>
+                                <span class="handle"></span>
+                            </label>
+                        </label>
+                        <label style="width: 95%;" class="uk-form-label uk-clearfix" for="settings-notify-noscript">Script Timeout Notify &nbsp; &nbsp;
+                            <label class="uk-checkslider uk-float-right">
+                                <input type="checkbox" id="settings-notify-noscript">
+                                <span class="label"></span>
+                                <span class="handle"></span>
+                            </label>
+                        </label>
+                    </div>
+                </div>
+                <br />                
+                <label class="uk-form-label" for="settings-scriptcheck">Script Check Timeout</label>
+                <input type="range" id="settings-scriptcheck" min="1000" step="100" max="5000"> <br/>
+                <div class="uikit-clearfix">
+                    <span id="settings-scriptcheck-value">1</span> Seconds
+                </div>                
+                <br />
+                <br />
+                <div class="uk-clearfix">
+                    
+                    <div class="uk-grid uk-grid-small">
+                        <div class="uk-width-1-2">
+                            <button id="settings-save" class="uk-button">Save Settings</button>
+                        </div>
+                        <div class="uk-width-1-2">
+                            
+                            <div class="uk-align-right">
+                                <button id="settings-reset-default" class="uk-button">Reset to Defaults</button>
+                                <button id="settings-cancel" class="uk-button uk-modal-close">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>
+</div>
+<script src="js/vendor/require.js" data-main="js/app.js"></script>
 </body>
-
 </html>

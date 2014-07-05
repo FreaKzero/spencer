@@ -7,7 +7,8 @@ define(function(require) {
             home: utils.hostFromUrl(window.location + ""),
             growl: 3000,
             scriptcheck: 2500,
-            notifysuccess: true
+            notifysuccess: true,
+            notifynoscript: true
         };
 
     return settings;

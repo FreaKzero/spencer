@@ -33,6 +33,7 @@ define(function() {
             'growl': '#settings-growl',
             'scriptcheck': '#settings-scriptcheck',
             'notifysuccess': '#settings-notify-on-success',
+            'notifynoscript': '#settings-notify-noscript',
             'growlValue': '#settings-growl-value',
             'scriptcheckValue': '#settings-scriptcheck-value'
         }

@@ -30,14 +30,16 @@ define(function(require) {
                 action: 'initCheck'
             }), host);
 
-            setTimeout(function() {
-                if (!scriptAvailable) {
-                    $.growl.warning({
-                        title: 'Cant find spencer.js on Testsite',
-                        message: 'Debugging/Error Reporting not available'
-                    });
-                }
-            }, Settings.get('scriptcheck'));
+            if (Settings.get('notifynoscript')) {
+                setTimeout(function() {
+                    if (!scriptAvailable) {
+                        $.growl.warning({
+                            title: 'Cant find spencer.js on Testsite',
+                            message: 'Debugging/Error Reporting not available'
+                        });
+                    }
+                }, Settings.get('scriptcheck'));
+            }
 
         } else {
             $.growl.warning({

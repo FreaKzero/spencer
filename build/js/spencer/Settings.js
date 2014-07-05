@@ -40,7 +40,28 @@ define(function(require) {
     $.growl.setDuration(Settings.get('growl'));
 
     $(selectors.settings.growlValue).text(getSeconds(Settings.get('growl')));
-    $(selectors.settings.scriptcheckValue).text(getSeconds(Settings.get('scriptcheck')));
+    if (!$(selectors.settings.notifynoscript).prop('checked')) {
+
+        $('#settings-scriptcheck').prop('disabled', 'disabled').css({
+            opacity: 0.3
+        }).val(1);
+
+    } else {
+        $(selectors.settings.scriptcheckValue).text(getSeconds(Settings.get('scriptcheck')));
+    }
+
+    $(selectors.settings.notifynoscript).on('change', function() {
+        if ($(this).prop('checked')) {
+            $('#settings-scriptcheck').removeProp('disabled').css({
+                opacity: 1
+            });
+
+        } else {
+            $('#settings-scriptcheck').prop('disabled', 'disabled').css({
+                opacity: 0.3
+            }).val(1);
+        }
+    });
 
     // Events for Modal
     $(selectors.settings.actualurl).on('click', function() {

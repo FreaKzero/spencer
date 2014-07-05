@@ -35,7 +35,7 @@ define(function(require, exports) {
     }
 
     function get(key) {
-        if (defaults[key]) {
+        if (settings[key]) {
             return settings[key];
         } else {
             return false;
