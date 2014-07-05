@@ -35,7 +35,7 @@ define(function(require, exports) {
     }
 
     function get(key) {
-        if (settings[key]) {
+        if (defaults[key]) {
             return settings[key];
         } else {
             return false;
@@ -43,8 +43,8 @@ define(function(require, exports) {
     }
 
     function set(key, value) {
-        if (settings[key]) {
-            return settings[key] = value;
+        if (defaults[key]) {
+            settings[key] = value;
         } else {
             return false;
         }
