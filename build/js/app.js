@@ -30,7 +30,7 @@ requirejs.config({
 });
 
 define(['jquery', 'jquery.hotkeys', 'jquery.uikit', 'jquery.spencerframe', 'jquery.storage', 'jquery.growl'], function($) {
-    require(['spencerDevices', 'spencerFrames', 'spencerErrors', 'spencerMain', 'spencerShortcuts', 'spencerSettings'],
+    require(['spencerDevices', 'spencerFrames', 'spencerErrors', 'spencerMain', 'spencerShortcuts', 'spencerSettings', 'easterEgg'],
         function(spencerDevices, spencerFrames, spencerErrors, spencerMain) {
 
             // I dont bother about IE users - not even for IE11 (no CSS Gradients in 2013 - rly ?)

@@ -8,7 +8,8 @@ define(function(require) {
             growl: 3000,
             scriptcheck: 2500,
             notifysuccess: true,
-            notifynoscript: true
+            notifynoscript: true,
+            easterEgg: true
         };
 
     return settings;

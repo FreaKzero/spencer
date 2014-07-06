@@ -60,6 +60,7 @@ define(function(require) {
             $('#settings-scriptcheck').prop('disabled', 'disabled').css({
                 opacity: 0.3
             }).val(1);
+            $('#settings-scriptcheck-value').text(1);
         }
     });
 
