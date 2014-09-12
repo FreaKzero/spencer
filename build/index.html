@@ -5,6 +5,139 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title></title>
         <link rel="stylesheet" href="css/uikit.darkgradient.min.css">
+        <style type="text/css">
+
+        #autorefresh {        
+        position: relative;
+        display: inline-block;
+        vertical-align: top;
+        width: 56px;
+        height: 25px;
+        padding: 2px;
+        background-color: #757575;
+        border-radius: 3px;
+        box-shadow: inset 0 -1px #757575, inset 0 1px 1px rgba(0, 0, 0, 0.05);
+        cursor: pointer;
+        background-image: -webkit-linear-gradient(top, #626262, #757575 25px);
+        background-image: -moz-linear-gradient(top, #626262, #757575 25px);
+        background-image: -o-linear-gradient(top, #626262, #757575 25px);
+        background-image: linear-gradient(to bottom, #626262, #757575 25px);
+        }
+        
+        #autorefresh > input {
+        position: absolute;
+        top: 0;
+        left: 0;
+        opacity: 0;
+        }
+
+        .autorefresh-label {
+        position: relative;
+        display: block;
+        height: inherit;
+        font-size: 12px;
+        text-transform: uppercase;
+        background: #eceeef;
+        border-radius: inherit;
+        box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.12), inset 0 0 2px rgba(0, 0, 0, 0.15);
+        -webkit-transition: 0.15s ease-out;
+        -moz-transition: 0.15s ease-out;
+        -o-transition: 0.15s ease-out;
+        transition: 0.15s ease-out;
+        -webkit-transition-property: opacity background;
+        -moz-transition-property: opacity background;
+        -o-transition-property: opacity background;
+        transition-property: opacity background;
+        }
+
+        .autorefresh-label:before, .autorefresh-label:after {
+        position: absolute;
+        top: 50%;
+        margin-top: -.5em;
+        line-height: 1;
+        -webkit-transition: inherit;
+        -moz-transition: inherit;
+        -o-transition: inherit;
+        transition: inherit;
+        }
+
+        .autorefresh-label:before {
+        font-family: FontAwesome;
+        content: "\f13c";
+        right: 14px;
+        color: #aaa;
+        text-shadow: 0 1px rgba(255, 255, 255, 0.5);
+        }
+        .autorefresh-label:after {
+        
+        font-family: FontAwesome;
+        content: "\f13c";
+        left: 14px;
+        color: white;
+        text-shadow: 0 1px rgba(0, 0, 0, 0.2);
+        opacity: 0;
+        }
+        #autorefresh > input:checked ~ .autorefresh-label {
+        background: #005577;
+        box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.15), inset 0 0 3px rgba(0, 0, 0, 0.2);
+        }
+        #autorefresh > input:checked ~ .autorefresh-label:before {
+        opacity: 0;
+        }
+        #autorefresh > input:checked ~ .autorefresh-label:after {
+        opacity: 1;
+        }
+        .autorefresh-handle {
+        position: absolute;
+        top: 2px;
+        left: 2px;
+        width: 20px;
+        height: 25px;
+        background: #008fc7;
+        border-radius: 3px;
+        box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
+        background-image: -webkit-linear-gradient(top, #00b2f3 40%, #008fc7);
+        background-image: -moz-linear-gradient(top, #00b2f3 40%, #008fc7);
+        background-image: -o-linear-gradient(top, #00b2f3 40%, #008fc7);
+        background-image: linear-gradient(to bottom, #00b2f3 40%, #008fc7);
+        -webkit-transition: left 0.15s ease-out;
+        -moz-transition: left 0.15s ease-out;
+        -o-transition: left 0.15s ease-out;
+        transition: left 0.15s ease-out;
+        }
+        .autorefresh-handle:before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin: -6px 0 0 -6px;
+        width: 12px;
+        height: 12px;
+        background: #f9f9f9;
+        border-radius: 6px;
+        box-shadow: inset 0 1px rgba(0, 0, 0, 0.02);
+        background-image: -webkit-linear-gradient(top, #008fc7, #00b2f3);
+        background-image: -moz-linear-gradient(top, #008fc7, #00b2f3);
+        background-image: -o-linear-gradient(top, #008fc7, #00b2f3);
+        background-image: linear-gradient(to bottom, #008fc7, #00b2f3);
+        }
+        #autorefresh > input:checked ~ .autorefresh-handle {
+        left: 38px;
+        box-shadow: -1px 1px 5px rgba(0, 0, 0, 0.2);
+        }
+        
+        #getQR {
+        font-size: 16px;
+        cursor:pointer;
+        -webkit-transition: 0.5s ease-out;
+        -moz-transition: 0.5s ease-out;
+        -o-transition: 0.5s ease-out;
+        transition: 0.5s ease-out;
+        }
+        #getQR:hover {
+        color: #9fd256;
+        }
+        </style>
     </head>
     
     <body>
@@ -20,15 +153,16 @@
             <div class="uk-navbar-content">
                 <div class="uk-form uk-margin-remove uk-display-inline-block">
                     <div class="uk-form-icon">
-                        <i class="uk-icon-compass"></i>
+                        <i class="uk-icon-qrcode" data-uk-modal="{target:'#qrmodal'}" id="getQR"></i>
                         <input type="text" id="url" value="http://localhost" style="width: 450px">
                     </div>
-                    <div class="uk-button-group">
-                        <button id="go" class="uk-button uk-button-primary" data-uk-tooltip="" title="CTRL+SHIFT+RETURN">
-                        <i class="uk-icon-crosshairs"></i>&nbsp;Devices</button>
-                        <button id="newWindow" class="uk-button uk-button-primary" data-uk-modal="{target:'#qrmodal'}">
-                        <i class="uk-icon-qrcode"></i>&nbsp;QR-Code</button>
-                    </div>
+                    <button id="go" class="uk-button uk-button-primary" data-uk-tooltip="" title="CTRL+SHIFT+RETURN">
+                    <i class="uk-icon-crosshairs"></i></button>
+                    <label id="autorefresh">
+                        <input type="checkbox">
+                        <span class="autorefresh-label"></span>
+                        <span class="autorefresh-handle"></span>
+                    </label>
                 </div>
             </div>
             <div class="uk-navbar-content uk-navbar-flip">
@@ -149,12 +283,12 @@
                         </label>
                     </div>
                 </div>
-                <br />                
+                <br />
                 <label class="uk-form-label" for="settings-scriptcheck">Script Check Timeout</label>
                 <input type="range" class="uk-range" id="settings-scriptcheck" min="1000" step="100" max="5000"> <br/>
                 <div class="uikit-clearfix">
                     <span id="settings-scriptcheck-value">1</span> Seconds
-                </div>                
+                </div>
                 <br />
                 <br />
                 <div class="uk-clearfix">

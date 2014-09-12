@@ -4,14 +4,10 @@
 define(function(require) {
     var selectors = require('js/config/selectors.js');
 
-    $(document).bind('keyup', 'ctrl+shift+r', function() {
-        $(document).trigger('globalOpen');
-    });
-    
     $('input#url').bind('keyup', 'return', function() {
         $(document).trigger('globalOpen');
     });
-    
+
     $(document).bind('keyup', 'return', function() {
         $('#url').focus();
     });

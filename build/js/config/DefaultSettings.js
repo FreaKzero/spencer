@@ -9,7 +9,8 @@ define(function(require) {
             scriptcheck: 2500,
             notifysuccess: true,
             notifynoscript: true,
-            easterEgg: true
+            easterEgg: true,
+            csspoll: 1000
         };
 
     return settings;

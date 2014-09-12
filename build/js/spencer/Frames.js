@@ -1,10 +1,7 @@
-/*jslint plusplus: true, vars: true, nomen: true, browser: true */
-/*global $, define */
-
 define(function(require) {
     var selectors = require('js/config/selectors.js'),
-        utils = require('js/lib/Utils.js'),
-        devicelink = selectors.main.dropdown + " a";
+        utils = require('js/lib/Utils.js'),        
+        devicelink = selectors.main.dropdown + " a";        
 
     $(document).on('click', selectors.frames.refresh, function() {
         $(this).children().addClass('uk-icon-spin');
@@ -44,7 +41,7 @@ define(function(require) {
 
         clone.find('iframe')
             .prop('id', HTMLID)
-            .bind('mouseleave', function() {                
+            .bind('mouseleave', function() {
                 $('*').blur();
             }).bind('load', function() {
                 $(document).trigger("checkErrors", [HTMLID]);
@@ -71,7 +68,7 @@ define(function(require) {
             height = settings.find(selectors.frames.height).val(),
             frame = elem.parent().parent().parent().parent(),
             iframe = frame.find('iframe');
-        
+
         if (rotate) {
             var oh = height;
             height = width;
@@ -88,15 +85,15 @@ define(function(require) {
             iframe.css({
                 'height': height,
                 'width': width
-            });                        
-         
+            });
+
             $(document).trigger('errorReCheck', [iframe.prop('id')]);
         });
     });
 
     $(document).on('click', selectors.frames.debug, function() {
         var viewport = $(this).parent().parent().find('.frame-width').val();
-         alert("event fired");
+        alert("event fired");
         //window.open($(selectors.main.url).val());
     });
 
@@ -112,7 +109,4 @@ define(function(require) {
     $(document).on('click', selectors.frames.rotate, function() {
         $(document).trigger('resizeFrame', [$(this), true]);
     });
-
-
-
 });

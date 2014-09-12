@@ -73,6 +73,10 @@ define(function(require) {
         Settings.reset();
         Settings.hydrateInputs();
 
+        $('#settings-scriptcheck').removeProp('disabled').css({
+            opacity: 1
+        });
+
         $.growl.success({
             message: 'Default Settings recovered'
         });

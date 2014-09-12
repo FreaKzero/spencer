@@ -2,6 +2,7 @@
 /*global requirejs, require, define */
 
 // TODO http://stackoverflow.com/questions/11458403/firefox-like-inspecting-element
+
 requirejs.config({
     paths: {
         'jquery': 'vendor/jquery-1.10.2.min',
@@ -17,10 +18,11 @@ requirejs.config({
         'spencerErrors': 'spencer/ErrorMessenger',
         'spencerShortcuts': 'spencer/Shortcuts',
         'spencerSettings': 'spencer/Settings',
+        'spencerCSS' : 'spencer/liveCSS',
         'easterEgg': 'spencer/EasterEgg'
-
     },
-    "shim": {
+
+    shim: {
         'jquery.hotkeys': ['jquery'],
         'jquery.uikit': ['jquery'],
         'jquery.spencerframe': ['jquery'],
@@ -30,7 +32,7 @@ requirejs.config({
 });
 
 define(['jquery', 'jquery.hotkeys', 'jquery.uikit', 'jquery.spencerframe', 'jquery.storage', 'jquery.growl'], function($) {
-    require(['spencerDevices', 'spencerFrames', 'spencerErrors', 'spencerMain', 'spencerShortcuts', 'spencerSettings', 'easterEgg'],
+    require(['spencerDevices', 'spencerFrames', 'spencerErrors', 'spencerMain', 'spencerShortcuts', 'spencerSettings', 'spencerCSS', 'easterEgg'],
         function(spencerDevices, spencerFrames, spencerErrors, spencerMain) {
 
             // I dont bother about IE users - not even for IE11 (no CSS Gradients in 2013 - rly ?)

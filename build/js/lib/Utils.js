@@ -26,6 +26,7 @@ define(function (require, exports) {
         return ScriptUrl.substring(0, ScriptUrl.lastIndexOf('/')) + "/spencer.js";        
     };
         
+    
     exports.validateUrl = validateUrl;
     exports.getScriptUrl = getScriptUrl;
     exports.hostFromUrl = hostFromUrl;
