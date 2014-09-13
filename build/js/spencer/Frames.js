@@ -1,7 +1,7 @@
 define(function(require) {
     var selectors = require('js/config/selectors.js'),
         utils = require('js/lib/Utils.js'),        
-        devicelink = selectors.main.dropdown + " a";        
+        devicelink = selectors.main.dropdown + " a";
 
     $(document).on('click', selectors.frames.refresh, function() {
         $(this).children().addClass('uk-icon-spin');
