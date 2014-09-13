@@ -12,14 +12,17 @@ requirejs.config({
         'jquery.storage': 'jquery/jquery.storage',
         'jquery.growl': 'jquery/jquery.growl',
 
-        'spencerMain': 'spencer/Main',
-        'spencerFrames': 'spencer/Frames',
-        'spencerDevices': 'spencer/DeviceLoader',
-        'spencerErrors': 'spencer/ErrorMessenger',
-        'spencerShortcuts': 'spencer/Shortcuts',
-        'spencerSettings': 'spencer/Settings',
-        'spencerCSS' : 'spencer/liveCSS',
-        'easterEgg': 'spencer/EasterEgg'
+        spencerMain: 'spencer/Main',
+        spencerFrames: 'spencer/Frames',
+        spencerDevices: 'spencer/DeviceLoader',
+        spencerErrors: 'spencer/ErrorMessenger',
+        spencerShortcuts: 'spencer/Shortcuts',
+        spencerSettings: 'spencer/Settings',
+        spencerCSS : 'spencer/liveCSS',
+        easterEgg: 'spencer/EasterEgg',
+
+        text : 'vendor/text',
+        mustache: 'vendor/mustache'
     },
 
     shim: {

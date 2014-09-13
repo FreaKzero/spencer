@@ -1,7 +1,10 @@
 define(function(require) {
     var selectors = require('js/config/selectors.js'),
-        utils = require('js/lib/Utils.js'),        
-        devicelink = selectors.main.dropdown + " a";
+        utils = require('js/lib/Utils.js'),
+        frameTemplate = require('text!../tpl/device.html');
+
+//TODO Selectors
+    devicelink = selectors.main.dropdown + " a";
 
     $(document).on('click', selectors.frames.refresh, function() {
         $(this).children().addClass('uk-icon-spin');
@@ -22,24 +25,27 @@ define(function(require) {
         });
     });
 
-
     $(document).on('spawnFrame', function(event, width, height) {
+
+        $(selectors.main.container).append(frameTemplate);
+
         var HTMLID = 'frame_' + $(selectors.frames.frame).size(),
+            $newFrame = $('.stencil'),
             nav = $(selectors.main.stencil).children(),
             url = $(selectors.main.url).val();
 
         nav.find(selectors.frames.width).val(width);
         nav.find(selectors.frames.height).val(height);
 
-        var clone = $(selectors.main.stencil)
-            .clone()
+            
+        $newFrame
             .removeClass(selectors.main.stencil.substr(1))
             .css({
                 'height': height,
                 'width': width
             });
 
-        clone.find('iframe')
+        $newFrame.find('iframe')
             .prop('id', HTMLID)
             .bind('mouseleave', function() {
                 $('*').blur();
@@ -53,13 +59,11 @@ define(function(require) {
             });
 
         if (utils.validateUrl(url)) {
-            clone.find('iframe').prop('src', url);
+            $newFrame.find('iframe').prop('src', url);
         } else {
-            clone.find('iframe').prop('src', 'start.html');
+            $newFrame.find('iframe').prop('src', 'start.html');
         }
 
-
-        clone.appendTo(selectors.main.container).hide().fadeIn("slow");
     });
 
     $(document).on('resizeFrame', function(event, elem, rotate) {

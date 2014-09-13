@@ -1,0 +1,28 @@
+ <div class="frame stencil" style="padding-bottom: 42px; background-color: #dcdcdc; float:left;">
+            <div class="uk-navbar uk-navbar-attached" style="padding: 5px 0 5px 10px">
+                <div class="uk-form uk-margin-remove uk-display-inline-block">
+                    <input type="number" min="200" max="1200" step="10" style="width: 50px" class="frame-width uk-form-small" />&nbsp;x
+                    <input type="number" min="200" max="1200" step="10" style="width: 50px" class="frame-height uk-form-small" />&nbsp;
+                    <div class="uk-button-group" style="margin-right: 5px;">
+                        <button class="uk-button uk-button-small resizeFrame" data-uk-tooltip="" title="Resize Device">
+                        <i class="uk-icon-arrows-alt"></i>
+                        </button>
+                        <button class="uk-button uk-button-small rotateFrame" data-uk-tooltip="" title="Rotate Device">
+                        <i class="uk-icon-rotate-right"></i>
+                        </button>
+                    </div>
+                    <div class="uk-button-group">
+                        <button class="uk-button uk-button-small debugFrame" data-uk-tooltip="" title="Debug View" disabled="disabled">
+                        <i class="uk-icon-bug"></i>
+                        </button>
+                        <button class="uk-button uk-button-small refreshFrame" data-uk-tooltip="" title="Refresh Device">
+                        <i class="uk-icon-refresh uk-icon-spin"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="uk-navbar-flip" style="margin: 2px 10px 0 0;">
+                    <i class="uk-icon-times closeFrame icon" data-uk-tooltip="" title="Close Device"></i>
+                </div>
+            </div>
+            <iframe src="start.html" scrolling="yes" border="0"></iframe>
+        </div>
