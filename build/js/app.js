@@ -18,11 +18,10 @@ requirejs.config({
         spencerErrors: 'spencer/ErrorMessenger',
         spencerShortcuts: 'spencer/Shortcuts',
         spencerSettings: 'spencer/Settings',
-        spencerCSS : 'spencer/liveCSS',
+        spencerCSS : 'spencer/liveCSS',        
         easterEgg: 'spencer/EasterEgg',
 
-        text : 'vendor/text',
-        mustache: 'vendor/mustache'
+        text : 'vendor/text',        
     },
 
     shim: {

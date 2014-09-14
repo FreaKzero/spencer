@@ -30,8 +30,7 @@ define(function(require) {
     // Non configurable Settings
     $.UIkit.tooltip.defaults.delay = 600;
     $.UIkit.tooltip.defaults.animation = true;
-
-    // selectors FTW
+    
     $(selectors.main.spencerjs).val('<script type="text/javascript" src="' + utils.getScriptUrl() + '"></script>');
 
     $(selectors.main.url).val(Settings.get('home'));
