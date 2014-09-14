@@ -21,7 +21,8 @@ define(function() {
             'dropdown': '#spawn',
             'url': '#url',
             'submit': '#go',
-            'spencerjs': '#spencerjsLink'
+            'spencerjs': '#spencerjsLink',
+            'liveCSS' : '#autorefresh'
         },
 
         'settings': {

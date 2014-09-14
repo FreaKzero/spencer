@@ -23,6 +23,10 @@ define(function(require) {
         $(this).parent().parent().parent().fadeOut('slow', function() {
             $(this).remove();
         });
+
+        if ($(selectors.frames.frame).size() === 1) {
+            $(selectors.main.liveCSS).hide();
+        }
     });
 
     $(document).on('spawnFrame', function(event, width, height) {
